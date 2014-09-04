@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>九游</title>
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+  <link rel="stylesheet" href="css/web.css"/>
+</head>
+<body data-ng-cloak ng-switch="loadState" style="visibility: hidden">
+  <!-- init loader -->
+  <div class="loading-img" ng-switch-when="loading"><span></span></div>
+
+  <!-- load error -->
+  <div id="error" ng-switch-when="error" ng-switch="loadErrorType" ng-click="reload()" style="background-color:#FFF">
+    <div ng-switch-when="network">
+      <div class="error-img">
+        <!-- 用ngsrc故一般情况下不会加载这两张图片-->
+        <img ng-src="{{'images/error_wifi.png'}}" width="140" height="140"/>
+      </div>
+      <p>网络连接失败，点击重试</p>
+    </div>
+
+    <div ng-switch-default>
+      <div class="error-img">
+        <img ng-src="{{'images/error_sorry.png'}}" width="140" height="140"/>
+      </div>
+      <p>加载失败，点击重试</p>
+    </div>
+  </div>
+
+  <!-- route container : GPU ACC backface-visibility:hidden; -->
+  <div id="view"></div>
+
+  <!-- load more -->
+  <div id="loaded" ng-switch-when="loaded">
+    <div style="margin-top:6px" ng-if="loadMoreState=='loading' || loadMoreState=='loaded'" class="loading-text"> 努力加载中……</div>
+    <div style="margin-top:6px" ng-if="loadMoreState=='end'" class="loading-text">已全部加载完成.</div>
+    <div style="margin-top:6px" ng-if="loadMoreState=='error'" ng-click="reloadPage()" class="loading-fail">加载失败，<span class="hot">点击重试</span>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

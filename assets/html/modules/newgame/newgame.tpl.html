@@ -1,0 +1,169 @@
+<!--新游首页 开始-->
+<div bindonce>
+    <div class="home-show">
+        <section id="ad_carousel" ngm-ad-slide="carousel" selectedIndex="{{selectedIndex}}" a1="xy_jdt" ada1="xy" region="newgame" exposure-stat="true" class="index-show"></section>
+    </div>
+    <ul class="mod-menu" id="newGameMenu" ng-if="loaded">
+        <li class="nav-sort" ng-click="openPage('/rank.html',{},'rank',{p1:'fl'})">分类</li>
+        <li class="nav-new" ng-click="openPage('/collection/newest.html',{},'common',{p1:'zx'})">最新</li>
+        <li class="nav-code" ng-if="imei" ng-click="openPage('/gift.html',{tabIndex:3},'gift',{p1:'jhm'})">激活码<sup class="count" ng-if="giftCount!=0&&giftCount"><span class="number" ng-bind="giftCount"></span></sup></li>
+        <li class="nav-ceping" ng-if="!imei" ng-click="openPage('/newgame/evaluateList.html',{},'common',{p1:'pc'})">评测</li>
+        <li class="nav-kaice" ng-click="openPage('/netgame/event.html',{type:0,tabIndex:1},'game_event',{p1:'kc'})">开测</li>
+    </ul>
+    <div class="home-con newgame-rec" ng-if="brokeList.length>0">
+      <div class="hd"><h2>新游爆料区</h2>
+        <div class="more"><a ng-click="openPage('/newgame/brokeList.html',{},'common',{action:'btn_getmore',a1:'xy_xyblq',p1:'xyblq'})">更多</a></div>
+      </div>
+      <ul class="baoliao-list" ng-if="brokeList.length>0">
+        <li class="item-news" ng-repeat="item in brokeList | limitTo:3" bindonce="item" ng-click="goArticleDetail(item,'broke',{a1:'xy_xyblq',p1:'xyblq',position:$index+2})">
+          <div class="pic"><img ng-src="{{item.imgUrl||item.logourl}}" hide-on-error="hide" width="72" height="72"></div>
+          <div class="con">
+            <div class="name" ng-bind="item.title"></div>
+            <div class="mix-info"><span bo-class="{'video': 'icon-video', 'pic': 'icon-photo'}[item.tag]"></span><span bo-text="(item.summary||item.content)|removeHtml"></span></div>
+            <div class="date" bo-text="item.modifyTime|slice:5:10"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="home-con newgame-future"  ng-if="expectList.length>0">
+        <div class="hd"><h2>新游期待榜</h2>
+            <div class="more"><a ng-click="openPage('/rank.html',{rankTag:'xyqdb'},'rank',{action:'btn_getmore',a1:'xy_xyqdb',p1:'xyqdb'})">更多</a></div>
+        </div>
+        <div class="newgame-future-head">
+            <span class="th-name">游戏</span>
+            <span class="th-status">最新动态</span>
+            <span class="th-count">热度</span>
+            <span class="th-btn"></span>
+        </div>
+        <ul class="newgame-future-list" id="ad_expectList">
+            <li ng-repeat="gameInfo in expectList | limitTo:5" ng-click="goGameDetail(gameInfo,{a1:'xy_xyqdb',p1:'xyqdb',position:$index+2,adpId:expectAdpId})"
+                gameId="{{gameInfo.base.gameId}}"   adpId="{{expectAdpId}}" admId="{{gameInfo.adm.admId}}">
+                <span class="name"><em class="num" bo-text="$index+1"></em>{{gameInfo.base.shortName}}</span>
+                <span class="status" bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus">
+                </span><span class="count em" bo-text="gameInfo.adm.adWord"></span>
+                <div class="btns">
+                <span ng-class="{'btn-primary-dis': gameInfo.isFollowed||gameInfo.base.isSimple,'btn-primary':!gameInfo.isFollowed}"
+                      ng-click="toggleFollowState($event,gameInfo,expectAdpId)"
+                      ng-bind="gameInfo.isFollowed? '已关注':'关注'"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="home-con newgame-pingce" ng-if="evaluateList.length>0">
+        <div class="hd"><h2>评测</h2>
+            <div class="more"><a ng-click="openPage('/newgame/evaluateList.html',{},'common',{action:'btn_getmore',a1:'xy_pc',p1:'pc'})">更多</a></div>
+        </div>
+        <ul class="newgame-pingce-list">
+            <li class="item-game" ng-repeat="item in evaluateList | limitTo:3"
+                ng-click="goArticleDetail(item,'evaluateList',{a1:'xy_pc',p1:'pc',position:$index+2})">
+                <div class="pic">
+                    <img ng-src="{{item.imgUrl||item.logourl}}" width="60" height="60" hide-on-error="hide">
+                </div>
+                <div class="con">
+                    <div class="name" bo-text="item.title"></div>
+                    <div class="mix-info" bo-text="(item.summary||item.content)|removeHtml"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="home-con newgame-kaice" ng-if="openTestList.length>1">
+        <div class="hd"><h2>开测</h2>
+            <div class="more"><a ng-click="openPage('/netgame/event.html',{type:0,tabIndex:1},'game_event',{action:'btn_getmore',a1:'xy_kc',p1:'jtkc'})">更多</a>
+        </div>
+        </div>
+        <ul class="newgame-kaice-list" id="ad_openTest" ngm-game-list="openTestList">
+            <li class="item-game" ng-repeat="gameInfo in openTestList | limitTo:4"
+                gameId="{{gameInfo.base.gameId}}" adpId="{{openTestAdpId}}" admId="{{gameInfo.adm.admId}}"
+                ng-click="goGameDetail(gameInfo,{a1:'xy_kc',p1:'jtkc',position:$index+2,adpId:openTestAdpId})">
+                <div class="pic">
+                    <img ng-src="{{gameInfo.base.gameIcon}}" hide-on-error='hide' width="60" height="60">
+                    <span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+                </div>
+                <div class="con" ng-switch="gameInfo.ui.region">
+                    <div class="name" bo-text="gameInfo.base.shortName"></div>
+                    <div class="info" bo-text="gameInfo.event.beginTime|slice:5:16"></div>
+                    <div ng-switch-when="state" class="info" ng-bind="gameInfo.ui.stateText"></div>
+                    <div ng-switch-when="info" class="info"
+                         ng-bind="gameInfo.adm.adWord||gameInfo.event.type"></div>
+                    <div ng-switch-when="progress" class="info">
+                        <div class="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div>
+                    </div>
+                </div>
+                <div class="btns btns-item">
+                    <span ng-click="gameInfo.ui.clickBtn(gameInfo, {a1:'xy_kc',adpId:openTestAdpId,ada1:'xy'},$event)" ng-class="'btn-primary'+gameInfo.ui.btnStyle"
+                          ng-bind="gameInfo.ui.btnText"></span><span ng-if="imei"
+                          ng-class="{'btn-primary':gameInfo.status.hasActiCode,'btn-primary-dis':!gameInfo.status.hasActiCode}"
+                          ng-style="{color: (!gameInfo.status.hasActiCode ? '#898989':'')}"
+                          ng-click="goGiftList($event,gameInfo,{a1:'xy_kc',ada1:'xy',adpId:openTestAdpId })">激活码</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="home-con newgame-new" ng-if="latestGameList.length>0">
+        <div class="hd"><h2>最新专区</h2>
+            <div class="more"><a ng-click="openPage('/newgame/latestGameList.html',{},'common',{action:'btn_getmore',a1:'xy_zxzq',p1:'zxzq'})">更多</a></div>
+        </div>
+        <ul class="newgame-new-list" id="ad_latestGame">
+            <li class="item-act" ng-repeat="gameInfo in latestGameList | limitTo:8"
+                ng-click="goGameDetail(gameInfo,{a1:'xy_zxzq',p1:'zxzq',position:$index+2})">
+                <div class="game-con">
+                    <div class="pic">
+                        <img ng-src="{{gameInfo.base.gameIcon}}" hide-on-error='hide' width="60" height="60">
+                        <span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+                    </div>
+                    <div class="con">
+                        <div class="name" bo-text="gameInfo.base.shortName"></div>
+                        <div class="info">
+                        <span bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus">
+                        </span><span ng-if="gameInfo.base.fileSize">|</span><span
+                                bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+                        </div>
+                    </div>
+                    <div class="btns"><span class="btn-date"
+                                            bo-text="(gameInfo.base.createTime|slice:5:10)+'建立'"></span></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="home-con" ng-if="marketLarge.length>0||marketSmall.length>0">
+        <div class="hd"><h2>新游话题大盘点</h2></div>
+        <ul class="newgame-show" id="ad_market">
+            <li class="con-1" ng-click="openPage(marketLarge[0].url,{a1:'xy_xyht',adpId:marketLargeAdpId,admId:marketLarge[0].admId},'',{p1:'xyht',position:1,gameId:marketLarge[0].gameId})">
+                <div class="pic" ng-style="{height:marketHeight+'px'}">
+                    <img  gameId="{{marketLarge[0].gameId}}" adpId="{{marketLargeAdpId}}" admId="{{marketLarge[0].admId}}" id="oneImage" ng-src="{{marketLarge[0].imageUrl}}" ng-style="{height:marketHeight+'px'}"
+                          hide-on-error="hide" width="100%" >
+                    <div ng-if="marketLarge[0].adWord" class="pic-name" ng-bind="marketLarge[0].adWord"></div>
+                </div>
+            </li>
+            <li class="con-2">
+                <div class="pic" ng-click="openPage(marketSmall[0].url,{adpId:marketSmallAdpId,admId:marketSmall[0].admId},'',{a1:'xy_xyht',p1:'xyht',position:2,gameId:marketSmall[0].gameId})">
+                    <img gameId="{{marketSmall[0].gameId}}" adpId="{{marketSmallAdpId}}" admId="{{marketSmall[0].admId}}" id="twoImage" ng-src="{{marketSmall[0].imageUrl}}" hide-on-error="hide"
+                           ng-style="{height:(marketHeight-4)/2+'px'}" width="100%">
+                    <div ng-if="marketSmall[0].adWord" class="pic-name" ng-bind="marketSmall[0].adWord"></div>
+                </div>
+                <div class="pic" ng-click="openPage(marketSmall[1].url,{adpId:marketSmallAdpId,admId:marketSmall[1].admId},'',{a1:'xy_xyht',p1:'xyht',position:3,gameId:marketSmall[1].gameId})">
+                    <img gameId="{{marketSmall[1].gameId}}" adpId="{{marketSmallAdpId}}" admId="{{marketSmall[1].admId}}" id="threeImage" ng-src="{{marketSmall[1].imageUrl}}" hide-on-error="hide"
+                      ng-style="{height:(marketHeight-4)/2+'px'}" width="100%">
+                    <div ng-if="marketSmall[1].adWord" class="pic-name" ng-bind="marketSmall[1].adWord"></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="home-con" ng-if="hotWords.length>0">
+        <div class="hd"><h2>今日新游热词</h2></div>
+        <div class="newgame-keyword">
+            <ul id="ad_hotWords">
+                <li ng-repeat="item in hotWords | limitTo:8" adpId="{{hotWordsAdpId}}" admId="{{item.admId}}" gameId="{{item.gameId}}"
+                    ng-click="openPage(item.url,{adpId:hotWordsAdpId,admId:item.admId},'',{a1:'xy_jrrc',a3:item.adWord,p1:'jrrc',position:$index+1,gameId:item.gameId})"
+                    bo-class="{'percent-67':$index==4,'percent-50':$index==5||$index==6,'percent-100':$index==7}">
+                    <a bo-class="{'bg-red':$index==0,'bg-green':$index==4,'bg-blue':$index==5}" bo-text="item.adWord"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!--新游首页 结束-->

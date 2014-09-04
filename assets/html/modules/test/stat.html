@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<div id="divParent">
+    <div id="divDisplay" style="background-color: #0f0; margin: 30px; padding: 10px;
+            height: 200px; width: 200px; border: solid 3px #f00">
+    </div>
+    <blockquote style="display: none">
+        <p>1. clientHeight和clientWidth用于描述元素内尺寸，是指 元素内容+内边距 大小，不包括边框（<span style="color: #ff0000;">IE下实际包括</span>）、外边距、滚动条部分
+        </p>
+
+        <p>2. offsetHeight和offsetWidth用于描述元素外尺寸，是指 元素内容+内边距+边框，不包括外边距和滚动条部分</p>
+
+        <p>3. clientTop和clientLeft返回内边距的边缘和边框的外边缘之间的水平和垂直距离，也就是左，上边框宽度</p>
+
+        <p>4. offsetTop和offsetLeft表示该元素的左上角（边框<span style="color: #ff0000;">外边缘</span>）与<span style="color: #ff0000;">已定位</span>的父容器（offsetParent对象）左上角的距离
+        </p>
+
+        <p>5. offsetParent对象是指元素最近的<span style="color: #ff0000;">定位</span>（relative,absolute）祖先元素，递归上溯，如果没有祖先元素是定位的话，会返回null
+        </p>
+    </blockquote>
+</div>
+<div>
+    <ul id="ad_guest">
+        <li id="ad_guest_1" >
+            <img src="http://image.game.uc.cn/2013/3/21/9087404_.jpg">
+        </li>
+        <li id="ad_guest_2" >
+            <img src="http://image.game.uc.cn/2013/3/21/9087404_.jpg">
+        </li>
+        <li id="ad_guest_3">
+            <img  src="http://image.game.uc.cn/2013/3/21/9087404_.jpg">
+        </li>
+        <li id="ad_guest_4">
+            <img  src="http://image.game.uc.cn/2013/3/21/9087404_.jpg">
+        </li>
+    </ul>
+</div>
+<div style="margin-top:1200px;margin-bottom: 400px">
+    <div>
+
+    </div>
+    <img id="img9087404" src="http://image.game.uc.cn/2013/3/21/9087404_.jpg">
+    <img id="img9235609" src="http://image.game.uc.cn/2013/7/11/9235609_.gif">
+</div>
+</body>
+<script type="text/javascript">
+    var div = document.getElementById('divDisplay');
+    var clientHeight = div.clientHeight;
+    var clientWidth = div.clientWidth;
+    div.innerHTML += 'clientHeight: ' + clientHeight + '<br/>';
+    div.innerHTML += 'clientWidth: ' + clientWidth + '<br/>';
+
+    var clientLeft = div.clientLeft;
+    var clientTop = div.clientTop;
+    div.innerHTML += 'clientLeft: ' + clientLeft + '<br/>';
+    div.innerHTML += 'clientTop: ' + clientTop + '<br/>';
+
+    var offsetHeight = div.offsetHeight;
+    var offsetWidth = div.offsetWidth;
+    div.innerHTML += 'offsetHeight: ' + offsetHeight + '<br/>';
+    div.innerHTML += 'offsetWidth: ' + offsetWidth + '<br/>';
+
+    var offsetLeft = div.offsetLeft;
+    var offsetTop = div.offsetTop;
+    div.innerHTML += 'offsetLeft: ' + offsetLeft + '<br/>';
+    div.innerHTML += 'offsetTop: ' + offsetTop + '<br/>';
+
+    var offsetParent = div.offsetParent;
+    div.innerHTML += 'offsetParent: ' + offsetParent.id + '<br/>';
+
+    div.innerHTML += 'screenHeight: ' + window.screen.height + '<br/>';
+
+
+    function isVisible(element) {
+        var rect = element.getBoundingClientRect();
+        return !!(rect.bottom - rect.top);
+    }
+
+    function getElementViewTop(element) {
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+        while (current !== null) {
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+        if (document.compatMode == "BackCompat") {
+            var elementScrollTop = document.body.scrollTop;
+        } else {
+            var elementScrollTop = document.documentElement.scrollTop;
+        }
+        return actualTop - elementScrollTop;
+    }
+
+    function getElementTop(element) {
+        var actualTop = element.offsetTop;
+        var current = element.offsetParent;
+        while (current !== null) {
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+        return actualTop;
+    }
+
+    function recordStat(element) {
+
+
+        console.log('img1:' + element.getBoundingClientRect().top);
+        console.log('img1 offsetTop:' + element.offsetTop);
+
+
+        console.log('img1 top:' + getElementViewTop(element));
+
+        // 获取浏览器可视高度
+        console.log('innerHeight: ' + window.innerHeight);
+        console.log('clientHeight: ' + document.documentElement.clientHeight);
+        console.log('elementHeight: ' + element.offsetHeight);
+        var browserViewHeight = window.innerHeight||document.documentElement.clientHeight;
+        var elementTopHeight = element.getBoundingClientRect().top;
+        var elementHeight = element.offsetHeight;
+
+        if(elementTopHeight>0){
+            if(elementTopHeight<browserViewHeight){
+                console.log('元素可见11');
+            }
+
+        }else if(Math.abs(elementTopHeight)<elementHeight){
+            console.log('元素可见22');
+        }
+
+    }
+
+
+    var EventUtil = {
+        addHandler: function (element, type, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent("on" + type, handler);
+            } else {
+                element["on" + type] = handler;
+            }
+        }
+    };
+
+
+    function isElementVisible(element) {
+        var browserViewHeight = window.innerHeight||document.documentElement.clientHeight;
+        var elementTopHeight = element.getBoundingClientRect().top;
+        var elementHeight = element.offsetHeight;
+
+        if(elementTopHeight>0){
+            if(elementTopHeight<browserViewHeight){
+                return true;
+            }
+
+        }else if(Math.abs(elementTopHeight)<elementHeight){
+           return true;
+        }
+        return false;
+    }
+
+
+    var cacheList =[],cacheStatusList = [];
+    function startStat (areaId){
+        var ulList = [];
+        if(cacheList[areaId]){
+            ulList = cacheList[areaId];
+        }else{
+            ulList =document.getElementById(areaId).getElementsByTagName("li");
+            cacheList[areaId]=ulList;
+            console.log(cacheList);
+        }
+        var len = ulList.length;
+        for(var i=0;i<len;i++)
+        {
+            var currentVisibleStatus = isElementVisible(ulList[i]);
+            var elementId = ulList[i].id;
+            console.log('elementId:'+elementId +' currentVisibleStatus:'+ currentVisibleStatus);
+            var cacheObj = cacheStatusList[elementId];
+            if(cacheObj){
+                var lastVisibleStatus = cacheObj.isVisible;
+                console.log('elementId:'+elementId +' lastVisibleStatus:'+ lastVisibleStatus);
+                if(!lastVisibleStatus && currentVisibleStatus){
+                    console.log(elementId + ' 曝光,记录一次统计');
+                }
+                cacheObj.isVisible = currentVisibleStatus;
+                cacheStatusList[elementId] = cacheObj;
+            }else if(currentVisibleStatus){
+                console.log(elementId + '曝光,记录一次统计');
+                cacheStatusList[elementId] = {isVisible:currentVisibleStatus};
+            }
+        }
+    }
+
+    EventUtil.addHandler(window, "scroll", function () {
+        console.log('startStat');
+        startStat('ad_guest');
+    });
+
+</script>
+</html>

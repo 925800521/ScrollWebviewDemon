@@ -1,0 +1,15 @@
+<ul class="toppic">
+  <li ng-repeat="album in albumList" bindonce="album" ng-click="goAlbumDetail(album)" class="item-topic" >
+    <div class="posi-rel">
+      <img bo-if="!hideImage" ng-src="{{album.imgUrl}}" width="100%"/>
+      <div bo-if="hideImage" class="default-img" bo-style="{'height':noImageHeight + 'px'}"></div>
+      <div class="topic-like">
+        <img src="images/icon_heart.png"><span bo-text="album.downStatTotal"></span>
+      </div>
+    </div>
+    <div class="topic-info">
+      <h4><span bo-text="album.name"></span><span class="topic-info-time" bo-text="album.createTime|slice:0:10"></span></h4>
+      <p bo-html='album.desp'></p>
+    </div>
+  </li>
+ </ul>

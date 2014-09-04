@@ -1,0 +1,73 @@
+<div class="game-list">
+  <ul class="mod-game-list" ngm-game-list="gameList">
+    <!-- BEGIN 游戏信息-->
+    <li class="item-game"  ng-repeat="gameInfo in gameList track by gameInfo.base.gameId" bindonce="gameInfo" index="{{$index}}" gameId="{{gameInfo.base.gameId}}"
+        adpId="{{gameListAdpId}}" admId="{{gameInfo.adm.admId}}"
+        ng-click="goGameDetail(gameInfo,{a1: statInfo? statInfo.a1:'',adpId:gameListAdpId,p1:statInfo?statInfo.p1:'',position:$index+1+(statInfo.pStart||0)})">
+      <!-- BEGIN 游戏图标-->
+      <div class="pic">
+        <span class="pic-mask">
+          <img ng-src="{{gameInfo.ui.data.gameIcon}}" hide-on-error='hide' width="60" height="60" style="visibility: hidden;">
+        </span>
+        <span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+        <span bo-if="gameInfo.status.starting" class="icon-starting"></span>
+      </div>
+      <!-- END 游戏图标-->
+
+      <!-- BEGIN 详细信息-->
+      <div class="con" ng-switch="gameInfo.ui.region">
+        <div class="name"><span bo-text="gameInfo.base.gameName"></span><span class="icon-good" bo-if="gameInfo.status.excellent=='9'"></span></div>
+
+        <!-- BEGIN 概要信息-->
+        <div class="info" ng-switch-when="info">
+          <!-- 相邻span标签中间不要有空格-->
+          <span bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus">
+          </span><span class="space" bo-if="gameInfo.base.fileSize">|</span><span
+           bo-text="gameInfo.base.fileSize | formatSize:1"></span><span class="space" bo-if="specailInfoField">|</span><span
+           bo-if="specailInfoField == 'downloadWeek'"
+           bo-text="'周下载' + (gameInfo.status.downloadWeek | formatDownload)"></span><span
+           bo-if="specailInfoField == 'downloadMonth'"
+           bo-text="'月下载' + (gameInfo.status.downloadMonth | formatDownload)"></span><span
+           bo-if="specailInfoField == 'downloadTotal'"
+           bo-text="'下载' + (gameInfo.status.downloadTotal | formatDownload)"></span><span
+           bo-if="specailInfoField == 'uploadTime'"
+           bo-text="gameInfo.base.uploadTime | slice:0:10"></span><span
+           bo-if="specailInfoField == 'recommendTime'"
+           bo-text="gameInfo.base.recommendTime | slice:5:10"></span>
+        </div>
+        <div bo-show="!gameScoreInstructDesc||gameScoreInstructDesc == 'gameScore'" class="info" ng-switch-when="info">
+          <p class="start-system">
+            <span ng-repeat="i in [0,1,2,3,4]" bo-class="{'good': gameInfo.status.avgScore>=i+1, 'soso': gameInfo.status.avgScore>i && gameInfo.status.avgScore<i+1}"></span>
+          </p>
+          <span class="space"></span>
+          <i class="icon-comment"></i>(<span bo-text="gameInfo.status.commentTotal"></span>)
+        </div>
+        <div bo-show="gameScoreInstructDesc == 'instruction'" class="info" ng-switch-when="info"  bo-text="gameInfo.adm.adWord||gameInfo.detail.instruction">
+        </div>
+
+      <!-- 显示游戏建立时间 -->
+      <div ng-switch-when="info">
+          <div class="info" bo-show="showTime" bo-text="(gameInfo.base.createTime | slice:5:10)+' 建立'" ></div>
+      </div>
+      <!-- END 概要信息-->
+
+        <!-- BEGIN 状态信息-->
+        <div class="info" ng-switch-when="state">{{gameInfo.ui.stateText}}</div>
+        <!-- BEGIN 状态信息-->
+
+        <!-- BEGIN 进度信息-->
+        <div class="progress" ng-switch-when="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div>
+        <div class="info down-info" ng-switch-when="progress">
+          <span ng-class="{'icon-gprs': gameInfo.ui.data.network=='3g' || gameInfo.ui.data.network=='2g', 'icon-wifi': gameInfo.ui.data.network=='wifi'}"></span>{{gameInfo.ui.stateText}}<span class="percent" ng-if="gameInfo.ui.data.progress">{{gameInfo.ui.data.progress}}%</span>
+        </div>
+        <!-- END 进度信息-->
+      </div>
+      <!-- END 详细信息-->
+
+      <!-- BEGIN 下载按钮-->
+      <div class="btns" ng-click="gameInfo.ui.clickBtn(gameInfo, statInfo, $event);"><span ng-class="'btn-primary'+gameInfo.ui.btnStyle" ng-bind="gameInfo.ui.btnText||'下载'"></span></div>
+      <!-- END 下载按钮-->
+    </li>
+    <!-- END 游戏信息-->
+  </ul>
+</div>

@@ -1,0 +1,123 @@
+.remote {
+  margin: auto auto;
+}
+
+.remote .header {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: #cecece;
+  width: 100%;
+}
+
+.remote .header .banner {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  color: #333333;
+  overflow: hidden;
+}
+
+.remote .btn_small div {
+  width: 125px;
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  font-size: 14px;
+  float: left;
+  background-image: url('../images/remote/btn_small.png');
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;;
+}
+
+.remote .btn_bigger div {
+  width: 215px;
+  text-align: center;
+  height: 35px;
+  line-height: 35px;
+  font-size: 14px;
+  float: left;
+  background-image: url('../images/remote/btn_bigger.png');
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;;
+}
+
+.remote .main {
+  text-align: center;
+}
+
+.remote .main a {
+  display: block;
+  border: 1px solid red;
+  margin: 10px 10px;
+  padding: 10px 10px;
+}
+
+.remote .main a span {
+  display: block;
+  word-break: break-all;
+  margin: 10px 10px;
+}
+
+.remote .rbutton {
+  background-color: #F76809;
+  color: white;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.remote .dialog {
+  background-image: url('../images/remote/dialog_small_bg.png');
+  background-repeat: no-repeat;
+  padding-left: 4px;
+}
+
+.remote .dialog .line {
+  background-image: url('../images/remote/line.png');
+  background-repeat: no-repeat;
+  height: 2px;
+  width: 325px;
+  overflow: hidden;
+}
+
+.remote .dialog .dialog_title {
+  color: #FF7712;
+  font-size: 16px;
+  text-align: left;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  padding-left: 8px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.remote .dialog .content {
+  margin-top: 20px;
+  height: 90px;
+}
+
+.remote .dialog .content p {
+  margin-bottom: 4px;
+}
+
+.remote .dialog .bottom {
+  padding-bottom: 16px;;
+}
+
+.remote .dialog .bottom input {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+  text-align: center;
+  vertical-align: middle;
+}

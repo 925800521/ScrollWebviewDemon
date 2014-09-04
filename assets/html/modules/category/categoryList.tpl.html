@@ -1,0 +1,14 @@
+<div class="home-con netgame-srot mod-none">
+    <ul class="netgame-srot-list" bindonce>
+        <!-- 新游网游分类列表 -->
+        <li ng-if="categoryList" ng-repeat="category in categoryList" ng-click="goCategoryDetailPage(category, $index)">
+            <div class="item-wrap">
+                <div class="con">
+                    <p class="game-title" ng-bind="category.name"></p>
+                    <p bo-show="showTotalGame" bo-text="category.total+' 款'"></p>
+                </div>
+                <div class="pic"><img ng-src="{{category.smallIcon}}" hide-on-error="hide" onerror="javascript:this.style.visibility='hidden';" width="60" height="60"></div>
+            </div>
+        </li>
+    </ul>
+</div>

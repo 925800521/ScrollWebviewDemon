@@ -1,0 +1,16 @@
+<div class="more-list">
+  <div ng-init="statInfo={a1:'lb'}" ng-include="'modules/shared/singleGame.tpl.html'"></div>
+  <div class="mod-con">
+    <div class="bd">
+      <ul class="mod-list">
+        <li ng-repeat="article in articleList track by article.id" bindonce="article" ng-click="goArticleDetail(article)">
+          <div class="title">
+            <span class="time" bo-text="article.modifyTime | slice:0:10"></span>
+            <span class="name" bo-text="article.title"></span>
+          </div>
+          <div class="info" bo-bind="article.summary | removeHtml"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

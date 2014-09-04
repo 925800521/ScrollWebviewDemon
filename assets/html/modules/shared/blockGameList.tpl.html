@@ -1,0 +1,24 @@
+<!-- BEGIN 游戏信息-->
+<div ng-switch="gameInfo.ui.region">
+    <!-- BEGIN 游戏图标-->
+    <div class="pic">
+          <img ng-src="{{gameInfo.ui.data.gameIcon}}" hide-on-error='hide' width="60" height="60">
+          <span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+    </div>
+    <!-- END 游戏图标-->
+    <div class="con">
+        <div class="name" bo-text="gameInfo.base.shortName"></div>
+        <div class="info" ng-switch-when="info">
+             <span bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus">
+            </span><span ng-if="gameInfo.base.fileSize">|</span><span bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+        </div>
+        <div class="info" ng-switch-when="state">{{gameInfo.ui.shortStateText}}</div>
+        <div class="info" ng-switch-when="progress"><div class="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div></div>
+    </div>
+    <!-- BEGIN 下载按钮-->
+    <div class="btns btns-item">
+        <span ng-class="'btn-primary'+gameInfo.ui.btnStyle" ng-click="gameInfo.ui.clickBtn(gameInfo,statInfo,$event)" ng-bind="gameInfo.ui.btnText"></span>
+    </div>
+    <!-- END 下载按钮-->
+</div>
+<!-- END 游戏信息-->

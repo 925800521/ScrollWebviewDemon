@@ -1,0 +1,14 @@
+<div class="game-area">
+    <ul class="gonglue-news">
+        <li ng-repeat="article in articleList" bindonce="articleList" ng-click="goArticleDetail(article)">
+            <a>
+                <h3><span class="em" bo-text="$index+1"></span>{{article.title|removeHtml}}</h3>
+                <p bo-html="article.summary|removeHtml"></p>
+                <span class="time" bo-text="article.modifyTime|transformDate"></span>
+            </a>
+        </li>
+    </ul>
+    <div ng-if="isEmpty" class="gift-none">
+        <p>目前暂无内容哦～</p>
+    </div>
+</div>

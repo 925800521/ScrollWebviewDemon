@@ -1,0 +1,10 @@
+
+
+<section class="fill-info">
+	<ul class="fill-box">
+		<li ng-repeat="i in list" ng-keyup="checkButton()"><label class="fill-text" >{{i.property}}</label><input type="text" placeholder='请输入{{i.property}}' ng-model='i.code' class="fill-input"></li>
+	</ul>
+	<p class="fill-tip">提交后可登录游戏查看</p>
+	<div class="fill-btn-wrap" ng-style="btnStyle"><input class='btn-fill-submit' type="button" value="提 交" ng-click="comfirm()"></div>
+    <input type="hidden" ng-click="hidKeyBord()">
+</section>

@@ -1,0 +1,23 @@
+<dd ng-switch="resultType" style="margin-left: 0px;">
+  <!-- 搜索结果 -->
+  <div ng-switch-when="search">
+    <div ng-include="'modules/shared/gameList.tpl.html'"></div>
+  </div>
+  
+  <!-- 搜索无结果 -->
+  <div ng-switch-when="empty">
+    <div class="search-con">
+      <div class="result-text">
+        抱歉，没有找到相关的游戏！看看大家都在<span class="em">玩什么？</span>
+      </div>
+      <div class="module-title">人气搜索排行</div>
+      <div class="search-list">
+        <ul>
+          <li ng-repeat="item in adList">
+            <a ng-repeat="game in item" ng-click="goRecommendedGameDetail(game.gameId)">{{game.title}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</dd>

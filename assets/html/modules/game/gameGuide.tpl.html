@@ -1,0 +1,30 @@
+<div class="game-area" style="margin-top: 8px">
+    <div class="gonglue-search">
+        <div class="search-con"><input ng-model="guide.Input" type="text" maxlength="64" class="search-input" placeholder="请输入搜索关键字" ></div>
+        <span class="search-btn" ng-click="search(guide.Input)">搜攻略</span>
+    </div>
+    <!--搜索结果-->
+    <div ng-if="searchResult.length>=0" bindonce="searchResult" class="gonglue-result" style="top: 36px">
+        <div class="result-title">与 “<span class="em">{{guide.Input}}</span>” 相关的攻略共{{searchResult.length||0}}条</div>
+        <ul class="gonglue-result-list" style="height:265px;"><!--高度动态获取，当前屏幕高度减去215px，如何有下载按钮再减30px-->
+            <li ng-repeat="search in searchResult" ng-click="goArticleDetail(search)">
+                <h3 bo-html="search.title"></h3>
+                <p  bo-html="search.summary"></p>
+            </li>
+        </ul>
+        <div ng-if="isSearchEmpty" class="gonglue-none">
+            <p>暂时没找到相关攻略哦~<br />换一个关键字试试吧!</p>
+        </div>
+        <div class="tips-close" ng-click="close()">关闭</div>
+    </div>
+    <ul class="gonglue-link" ng-if="guideCategoryList" bindonce="guideCategoryList">
+        <li ng-repeat="category in guideCategoryList" ng-click="goArticleList(category,$index)">
+            <a><img ng-src="{{category.imageUrl}}" width="36" height="36"><span class="name" bo-text="category.cateName"></span></a>
+        </li>
+    </ul>
+    <!--无数据时显示-->
+    <div ng-if="isEmpty" class="gonglue-none">
+        <p>攻略正在锻造中…</p>
+    </div>
+
+</div>

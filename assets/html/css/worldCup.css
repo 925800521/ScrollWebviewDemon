@@ -1,0 +1,201 @@
+body{ background:#78BD3C;}
+/*公用*/
+.act-notice,
+.btn-act,
+.btns-item .btn-primary,
+.btns-item .btn-primary-dis,
+.btns-item .btn-primary-em,
+.cup-duihuan .btn-primary-dis,
+.cup-duihuan .btn-primary,
+.act-download .btn-primary,
+.act-download .btn-primary-em,
+.act-download .btn-primary-dis,
+.cup-jijinbang li:nth-child(2) .rank::before,
+.cup-jijinbang li:nth-child(3) .rank::before,
+.cup-jijinbang li:nth-child(4) .rank::before{ background-image:url(../images/worldCup/bg_sprites.png); -webkit-background-size:64px auto;}
+.btns-item .btn-primary{ width:64px; height:34px;line-height:34px; background-position:0 -80px; color:#FFF;}
+.btns-item .btn-primary-dis{ width:64px; height:34px; line-height:34px;background-position:0 -115px; color:#B3D595;}
+.btns-item .btn-primary-em{ width:64px; height:34px;line-height:34px; background-position:0 -150px; color:#583D12; font-weight:bold;}
+.cup-duihuan .btn-primary{width:64px; height:32px; line-height:32px; background-position:0 -185px;color:#583D12; font-weight:bold;}
+.cup-duihuan .btn-primary-dis{width:64px; height:32px; line-height:32px; background-position:0 -220px;color:#A8CA8B; font-weight:bold;}
+.act-download .btn-primary-em{width:64px; height:32px; line-height:32px; background-position:0 -185px;color:#583D12; font-weight:bold;}
+.act-download .btn-primary{width:64px; height:32px; line-height:32px; background-position:0 -220px;color:#FFF; font-weight:bold;}
+.act-download .btn-primary-dis{width:64px; height:32px; line-height:32px; background-position:0 -255px;color:#B3D595; font-weight:bold;}
+
+.mod-cup-title,
+.title-step,
+.title-gift,
+.title-bang,
+.title-area,
+.title-duihuan,
+.title-chongbang,
+.title-jijinbang,
+.title-mygift,
+.title-time,
+.title-canyu,
+.title-huoqu,
+.title-duiguize,
+.title-bangguize,
+.title-huodong,
+.title-lingjiang,
+.title-tebie,
+.title-share{ background-image:url(../images/worldCup/bg_title.png); -webkit-background-size:230px auto; overflow:hidden; line-height:200px;}
+.mod-cup-title{ height:19px; background-repeat:repeat-x; margin-bottom:20px;}
+.title-step{ width:230px;height:19px; background-position:0 -60px; margin:0 auto;}
+.title-gift{ width:230px;height:19px; background-position:0 -80px; margin:0 auto;}
+.title-bang{ width:230px;height:19px; background-position:0 -100px; margin:0 auto;}
+.mod-cup-con{ margin:0 12px; background:#66AA2A; border:1px solid #4D970C;}
+.title-area{ width:155px; height:34px;background-position:0 -120px;}
+.title-duihuan{ width:130px; height:34px;background-position:0 -155px;}
+.title-chongbang{ width:125px; height:34px;background-position:0 -190px;}
+.title-jijinbang{ width:110px; height:34px;background-position:0 -225px;}
+.title-mygift{ width:130px; height:34px;background-position:0 -260px;}
+.title-time{width:125px; height:34px;background-position:0 -295px;}
+.title-canyu{width:125px; height:34px;background-position:0 -330px;}
+.title-huoqu{width:125px; height:34px;background-position:0 -365px;}
+.title-duiguize{width:160px; height:34px;background-position:0 -400px;}
+.title-bangguize{width:160px; height:34px;background-position:0 -435px;}
+.title-huodong{width:125px; height:34px;background-position:0 -470px;}
+.title-lingjiang{width:125px; height:34px;background-position:0 -505px;}
+.title-tebie{width:125px; height:34px;background-position:0 -540px;}
+.title-share{width:175px; height:34px;background-position:0 -575px;}
+
+.act-top{ margin-bottom:2px;}
+.act-top img{ display:block;}
+.act-notice{ margin:0 20px 15px 20px; padding-left:26px; height:23px; overflow:hidden; position:relative;  background-repeat:no-repeat; background-position:0 6px;}
+.act-notice li{ color:#FFF; font-size:16px; line-height:23px;white-space:nowrap;}
+.act-notice li .num{ padding-right:20px;}
+.act-jijin{ height:40px; background:#61A525; position:relative; padding-left:11px; color:#0b3400; font-size:16px; border:1px solid #428D00; margin:0 12px 20px; display:-webkit-box;-webkit-box-align:center;}
+.act-jijin .count{ color:#FFF;  display:-webkit-box;-webkit-box-align:center; height:22px; font-size:16px; font-weight:bold; padding:0 10px; background:#D83717;border-radius:2px;-webkit-border-radius:2px;}
+.act-jijin .btn-act{ display:block; width:64px; height:34px; line-height:100px; overflow:hidden; background-position:0 -45px; position:absolute; top:3px; right:4px;}
+/*首页*/
+.cup-step-con{ padding:0 8px 20px;}
+.cup-bang-con{ padding:0 10px 20px;}
+.cup-area-list{ margin-bottom:20px; overflow:hidden;}
+.cup-area-list .item-act{ width:25%; text-align:center; padding:20px 0 0;-webkit-box-sizing: border-box; box-sizing: border-box;  float:left;background:none;}
+.cup-area-list:after { clear: both; display: block; visibility: hidden; height: 0; content: ""; }
+.cup-area-list .item-act .name{ height:20px; font-size:16px; color:#FFF; padding:5px 0}
+.cup-area-list .item-act .info{ height:21px; color:#0B3400;}
+.cup-area-list .item-act .info .progress{ margin-top:6px;}
+.cup-con-how{ border-bottom:none; overflow:hidden;}
+.act-more a{ margin:0 12px 10px;  background:#3B7F00; height:44px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center; font-size:16px; font-weight:bold; color:#D8B825;}
+.act-share{ margin:0 12px 30px;}
+.act-share a{background:#FEC92F; height:42px; border:1px solid #FFBA00; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center; font-size:16px; font-weight:bold; color:#583D12;}
+.act-share p{ color:#0B3400; font-size:12px; line-height:15px;  padding:8px 0 0 8px; }
+.cup-gift-con{ margin:0 12px 30px; overflow:hidden;}
+.cup-gift-con li{ height:112px; background:#4F9611; position:relative; width:33%; float:left;}
+.cup-gift-con li:nth-child(3n){ width:34%;}
+.cup-gift-con li .pic{ height:88px;display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;}
+.cup-gift-con li .name{ height:24px; background:#3F8600; color:#FFF; font-size:14px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;}
+.cup-gift-con p{ color:#0B3400; font-size:12px; line-height:15px; padding:8px 0 0 8px; clear:both;}
+.cup-gift-con li:nth-child(2n){ background:#66AA2A}
+.cup-gift-con li:nth-child(2n) .name{ background:#599C1F}
+/*奖品*/
+.act-jinagpin{ padding-top:54px;}
+.act-jinagpin .count{ margin-right:14px;}
+.act-user{ height:42px; margin:0 12px 0 20px; line-height:32px; font-size:16px; color:#0B3400; position:relative;}
+.act-user .btn-mygift{ padding:0 5px; height:32px; background:#3B7F00;border-radius:2px;-webkit-border-radius:2px; display:block; position:absolute; right:0; top:0; font-size:12px; color:#FEC92F; font-weight:bold; display:-webkit-box;
+-webkit-box-pack:center;-webkit-box-align:center;}
+.act-jinagpin .act-jijin{ color:#FFF;}
+.cup-duihuan-con li{ height:84px; margin:10px 0; background:#519516; display:-webkit-box;
+-webkit-box-pack:center;-webkit-box-align:center;}
+.cup-duihuan-con li:last-child{ margin-bottom:0;}
+.cup-duihuan-con li .pic{ width:83px; display:-webkit-box;-webkit-box-pack:center;
+-webkit-box-align:center;}
+.cup-duihuan-con li .btns{ width:74px;}
+.cup-duihuan-con li .con{-webkit-box-flex: 1;}
+.cup-duihuan-con li .name{ color:#FFF; font-size:16px; line-height:30px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.cup-duihuan-con li .info{ color:#FEC92F; font-size:14px; line-height:20px;}
+/*积金*/
+.act-jijinbang{ padding-top:54px;}
+.act-jijinbang .act-jijin{ margin-bottom:5px;}
+.act-jijinbang .bang-info{ margin:0 22px; font-size:12px; line-height:18px; color:#0b3400;}
+.bang-btns { margin:10px 20px 20px;display: -webkit-box;}
+.bang-btns a{-webkit-box-flex: 1; height:38px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center; font-size:14px; font-weight:bold;border-radius:2px;-webkit-border-radius:2px;}
+.bang-btns a:first-child{ background:#3B7F00; color:#FEC92F; margin-right:10px;}
+.bang-btns a:last-child{ background:#FEC92F; color:#583D12}
+.cup-chongbang{ margin-bottom:20px;}
+.cup-chongbang-con li{ font-size:14px; font-weight:bold; color:#FFF; height:37px; line-height:37px; background:url(../images/worldCup/border-top.png) repeat-x; -webkit-background-size:1px 1px;}
+.cup-chongbang-con li .name{ display:inline-block; width:152px; color:#296100; text-indent:20px;}
+.cup-chongbang-con li .name .count{ color:#FEFFD5;}
+.cup-jijinbang li{font-size:14px; font-weight:bold; color:#F2FFE5; height:37px; line-height:37px; background:url(../images/worldCup/border-top.png) repeat-x; -webkit-background-size:1px 1px;display: -webkit-box;}
+.cup-jijinbang li .rank{ width:70px;display:block; text-align:center; position:relative;}
+.cup-jijinbang li .id{ -webkit-box-flex: 1;display:block; width:100%; text-align:center;}
+.cup-jijinbang li .over{-webkit-box-flex: 1;display:block;width:100%; text-align:center;}
+.cup-jijinbang .jijinbang-head{ background:#599C1F;}
+.cup-jijinbang .jijinbang-head .rank,
+.cup-jijinbang .jijinbang-head .id,
+.cup-jijinbang .jijinbang-head .over{ color:#296100; }
+.cup-jijinbang li:nth-child(2) .rank,
+.cup-jijinbang li:nth-child(3) .rank,
+.cup-jijinbang li:nth-child(4) .rank{ position:relative; line-height:200px; overflow:hidden;}
+.cup-jijinbang li:nth-child(2) .rank::before,
+.cup-jijinbang li:nth-child(3) .rank::before,
+.cup-jijinbang li:nth-child(4) .rank::before{ display:block;content:""; width:17px; height:20px; background-position:0 -20px; position:absolute; left:50%; top:8px; margin-left:-7px;}
+.cup-jijinbang li:nth-child(3) .rank::before{ background-position:-20px -20px;}
+.cup-jijinbang li:nth-child(4) .rank::before{ background-position:-40px -20px;}
+.cup-jijinbang .none{ font-size:14px; line-height:24px; color:#296100; display:-webkit-box;
+-webkit-box-pack:center;
+-webkit-box-align:center; text-align:center; height:140px;}
+/*我的奖品*/
+.act-my{ padding-top:10px;}
+.cup-mygift-con li{min-height:84px; margin:10px 0; background:#519516; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;}
+.cup-mygift-con li:last-child{ margin-bottom:0;}
+.cup-mygift-con li .pic{ width:83px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;}
+.cup-mygift-con li .con{-webkit-box-flex: 1; padding-bottom:5px;}
+.cup-mygift-con li .name{ color:#FFF; font-size:16px; line-height:30px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.cup-mygift-con li .info{ color:#FEC92F; font-size:14px; line-height:20px;}
+.cup-mygift-con .mygift-libao{ height:111px;}
+.cup-mygift-con .mygift-libao .con{ margin-right:10px;}
+.cup-mygift-con .time{ font-size:12px; color:#0B3400; line-height:15px;}
+
+.cup-mygift-con .info-code{ overflow: hidden; margin-bottom:4px; height:34px; white-space: nowrap; text-overflow: ellipsis; position:relative;display: -webkit-box; }
+.cup-mygift-con .info-code .code-con,
+.cup-mygift-con .info-phone{background:#5DA121; color: #FEC92F;border:1px solid #408800; height:32px;-webkit-box-flex: 1; -webkit-border-radius: 2px;border-radius: 2px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.cup-mygift-con .info-code .btn-copy{ width:46px; height: 34px;  font-size: 12px; font-weight:bold; background:#FEC92F; color: #583D12;  -webkit-border-radius: 2px;border-radius: 2px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center; margin-left:5px; }
+.cup-mygift-con .info-code label,
+.cup-mygift-con .info-code .text { white-space: nowrap; line-height:32px; font-size:14px;}
+.cup-mygift-con .info-code label { color: #0B3400; padding-left:5px;}
+.cup-mygift-con .info-code .text { color: #FEC92F; }
+.cup-mygift-con .info-phone{ margin:0 20px 3px 0; height:24px; padding:0 5px;}
+.cup-mygift-con .info-phone .tel{ width:100%; background:none; line-height:normal; border:none; color:#333;}
+/*活动说明*/
+.act-shuoming{ padding-top:10px;}
+.act-shuoming .mod-cup-con{ margin-bottom:20px;}
+.act-shuoming .mod-cup-con p{ font-size:14px; color:#FFF; line-height:18px; padding:10px 12px 8px; background:url(../images/worldCup/border-top.png) repeat-x; -webkit-background-size:1px 1px;}
+.act-shuoming .mod-cup-con li{font-size:14px; color:#FFF; line-height:18px; padding:10px 12px 8px; background:url(../images/worldCup/border-top.png) repeat-x; -webkit-background-size:1px 1px;}
+/*下载*/
+.act-download .item-game{ padding:12px 12px 13px; background:#66AA2A url(../images/worldCup/border-top.png) repeat-x 0 bottom; -webkit-background-size:1px 1px;}
+.act-download .item-game .name{ color:#FFF;}
+.act-download .item-game .info{ color:#0b3400; font-size:14px!important;}
+.act-download .item-game .info+.info{ font-size:12px!important;}
+.act-download .item-game .info .space,
+.act-download .item-game .info span{color:#0b3400!important;font-size:14px!important;}
+
+#scroll_begin,#scroll_end,#scroll_begin ul,#scroll_end ul,#scroll_begin ul li,#scroll_end ul li
+{
+    display: inline; /*设置ul和li横排*/
+}
+#scroll_begin ul li,#scroll_end ul li{
+    margin-right: 60px;
+}
+
+.cup-con-share{ margin-bottom:35px;}
+.act-share-con {display: -webkit-box; padding:17px 0 12px 0;}
+.act-share-con .con{-webkit-box-flex: 1;}
+.act-share-con .pic{ width:120px;  display:-webkit-box;
+-webkit-box-pack:center;
+-webkit-box-align:center;}
+.act-share-con p{ color:#0b3400; margin-left:10px; line-height:15px; font-size:12px; margin-bottom:6px;}
+.act-share-con .c-yellow{ color:#FEC92F;}
+.act-share-con .c-red{ display:inline-block; padding:0 1px; background:#D83717; color:#fff;}
+.cup-con-share .act-share-btn{ text-align:center; margin-bottom:12px;}
+.cup-con-share .act-share-btn a{ display:block; width:180px; height:43px; margin:0 auto; line-height:500px; background:url(../images/worldCup/btn-share.png);  -webkit-background-size:180px auto;
+-webkit-animation:pulse  .78s 0s infinite  ease both;
+}
+
+@-webkit-keyframes pulse{
+0%{-webkit-transform:scale(1)}
+50%{-webkit-transform:scale(.9)}
+100%{-webkit-transform:scale(1)}
+}

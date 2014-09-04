@@ -1,0 +1,21 @@
+<!--浮层 开始-->
+
+  <div class="pop-alert">
+    <h2>{{title}}</h2>
+    <div class="pop-con item-number" >
+    	<div ng-bind-html="content"></div>
+        <div class="info-code" ng-repeat="code in codeList">
+            <div class="code-con">
+                <label>{{code.key}}：</label>
+                <span class="em">{{code.value}}</span>
+            </div>
+            <span class="btn-copy" ng-click="copy(code.value)">复制</span>
+        </div>
+    </div>
+    <div class="pop-control">
+      <div ng-repeat="btn in btnList track by $index" ng-click="clickBtn(btn)" ng-class=" btn.primary ? 'pop-btn-em' : 'pop-btn' " >
+        <span class="text">{{btn.text}}</span>
+      </div>
+    </div>
+  </div>
+<!--浮层 结束-->

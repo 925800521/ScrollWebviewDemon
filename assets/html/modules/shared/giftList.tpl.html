@@ -1,0 +1,133 @@
+<!-- 礼包 开始 -->
+<style>
+    .item-number {display: none;}
+</style>
+<li class="item-number" ng-style="customCfg.styleShow" ng-repeat="item in giftList" ng-show="item.sceneId" gift-item="item" ng-switch="customCfg.tmpl" >
+    <!-- {{item.sceneId}} -->
+    <div  class="item-game" ng-style="{'padding-left' : customCfg.isGameDetail ? '0px' : '12px'}">
+        <!-- 图片 -->
+        <div class="pic" ng-if="!noPic" ng-click="redirectToDetail(item, $index)">
+            <img ng-src="{{item.icon}}"  hide-on-error="hide" width="60" height="60" alt="" onerror="javascript:this.style.display='none';">
+            <!-- <div>{{item.status}}, {{customCfg.tmpl}}</div> -->
+        </div>
+        <div ng-if="customCfg.isGameDetail" class="pic-gift" style="width: 29px;" ng-click="redirectToDetail(item, $index)"></div>
+        <div class="con" ng-click="redirectToDetail(item, $index)">
+            <!-- 即将预订 -->
+            <div ng-switch-when="willSubscribe">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">即将开始预订</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 预订 -->
+            <div ng-switch-when="subscribe">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info">已有 <span class="em">{{item.bookCount}}</span> 人预订</div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 暂停预订 -->
+            <div ng-switch-when="subscribeStop">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">暂时不能预订</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 已预订 -->
+            <div ng-switch-when="subscribed">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">请留意通知栏消息</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 即将领号 -->
+            <div ng-switch-when="willGet">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">即将开始领号</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 领号 -->
+            <div ng-switch-when="get">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info" ng-if="item.issueForm"><span class="em">提交游戏资料即可获得</span></div>
+                <div ng-include=" 'downloadBar.html' "></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+
+            <!-- 已领号 -->
+            <div ng-switch-when="got">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info" ng-if="item.issueForm"><span class="em">登录查看详情</span></div>
+                <div class="info" ng-if="!item.issueForm && !customCfg.isDetail"><span class="em">点击查看详情</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 停止领号 -->
+            <div ng-switch-when="getStop">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">敬请期待下时段领号</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 即将淘号 -->
+            <div ng-switch-when="willDredge">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">即将开始淘号</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 淘号 -->
+            <div ng-switch-when="dredge">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info">已淘<span class="em"> {{item.taoCount}} </span>次</div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 暂停淘号 -->
+            <div ng-switch-when="dredgeStop">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">敬请期待下时段淘号</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+            <!-- 已过期 -->
+            <div ng-switch-when="end">
+                <div ng-include=" 'name.html' "></div>
+                <div class="info"><span class="em">该礼包已过期</span></div>
+                <div ng-include=" 'desc.html' "></div>
+            </div>
+        </div>
+        <div ng-include=" 'btn.html' "></div>
+    </div>
+    <div ng-if="item.issueForm!=1" ng-include=" 'code.html' "></div>
+    <div class="gift-nav" ng-if="customCfg.isDetail">
+        <div class="item-nav"><a ng-click="goGameDetail()">进入专区</a></div>
+        <div class="item-nav"><a ng-click="goGiftList()">更多礼包</a></div>
+    </div>
+
+</li>
+<!-- 礼包 结束 -->
+<!-- 模板: 名称 -->
+<script type="text/ng-template" id="name.html">
+<div ng-if="customCfg.isDetail" class="name">{{item.name}}</div>
+<div ng-if="!customCfg.isDetail" class="name" ng-class="{'title-new': item.newFlag==1}" >{{item.name}}</div>
+</script>
+<!-- 模板: 按钮 -->
+<script type="text/ng-template" id="btn.html">
+<div class="btns" ng-if="!customCfg.isLoading" ng-click="btnClick(item)"><span ng-class="customCfg.btnClass">{{customCfg.btnText}}</span></div>
+<div class="btns" ng-if="customCfg.isLoading" ng-click="btnClick(item)"><span class="btn-primary-dis">请等待</span></div>
+</script>
+<!-- 模板: 进度条 -->
+<script type="text/ng-template" id="downloadBar.html">
+<div class="code-info" ng-if="!item.issueForm"><div class="publish"><div class="bg" style="width:{{customCfg.percentage}}%"></div></div><span class="percent em">剩余{{customCfg.percentage}}%</span></div>
+</script>
+<!-- 模板: 礼包内容 -->
+<script type="text/ng-template" id="desc.html">
+<div class="mix-info" ng-if="!customCfg.isDetail && !customCfg.isActivation">礼包内容：<span ng-if="item.filterBody">{{item.filterBody}}</span><span ng-if="!item.filterBody">暂无</span></div>
+<div class="info icon-time" ng-if="interval.show">还有<span class="em" ng-bind="interval.hour"></span>小时<span class="em" ng-bind="interval.minute"></span>分<span class="em" ng-bind="interval.second"></span>秒开始</div>
+<div class="info" ng-if="customCfg.isActivation"><span class="em">{{item.issueStarttime | formatDate}}</span></div>
+
+</script>
+<!-- 模板: 号 -->
+<script type="text/ng-template" id="code.html">
+<div ng-if="customCfg.isDetail&&item.issueForm!=1">
+    <div class="info-code" ng-repeat="code in customCfg.codeList">
+        <div class="code-con">
+            <label>{{code.key}}：</label>
+            <span class="em">{{code.value}}</span>
+        </div>
+        <span class="btn-copy" ng-click="copyCode(code.value)">复制</span>
+    </div>
+</div>
+</script>

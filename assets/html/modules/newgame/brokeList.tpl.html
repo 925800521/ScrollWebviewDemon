@@ -1,0 +1,10 @@
+<ul class="baoliao-list" ng-if="vm.articleList.length>0">
+  <li class="item-news" ng-repeat="item in vm.articleList track by item.id" bindonce="item" ng-click="vm.goArticleDetail(item,'broke')">
+    <div class="pic"><img ng-src="{{item.imgUrl||item.logourl}}" hide-on-error="hide" width="72" height="72"></div>
+    <div class="con">
+      <div class="name" ng-bind="item.title"></div>
+      <div class="mix-info"><span bo-class="{'video': 'icon-video', 'pic': 'icon-photo'}[item.tag]"></span><span bo-text="(item.summary||item.content)|removeHtml"></span></div>
+      <div class="date" bo-text="item.modifyTime|slice:5:10"></div>
+    </div>
+  </li>
+</ul>

@@ -1,0 +1,211 @@
+<div bindonce="gameInfo" class="game-area">
+  <!-- 公告 -->
+  <div class="detail-notice" bo-if="boardList.length" marquee="boardList" marquee-duration="3000">
+    <p><span ng-repeat="item in boardList" bo-text="item.title|removeHtml" ng-click="goBoardDetail(item, 'guide', 'zq_xq-gg')"></span></p>
+  </div>
+
+  <!-- 大事件 -->
+  <div class="detail-diary" bo-if="eventList.length">
+    <div class="detail-diary-con">
+      <ul scrollable="true"
+          parameters="{{ {scrollX : true, scrollY: false ,bounce : false, center : '.scroll-center', prev : '.diary-pre', next : '.diary-next'} }}">
+        <li ng-repeat="item in eventList" class="{{item.bgStyle}} {{eventIndex+1==$index?'scroll-center':''}}">
+          <span class="status" bo-text="item.content"></span>
+          <span class="time" bo-text="item.beginTime"></span>
+          <em class="point"></em>
+        </li>
+      </ul>
+    </div>
+    <div class="diary-pre">上一个</div>
+    <div class="diary-next">下一个</div>
+  </div>
+
+  <style>
+  .iScrollHorizontalScrollbar {
+      position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: #F2F2F2; border-radius: 10px;
+  }
+  .iScrollIndicator {
+      height: 4px; position: relative; background: #F59E37; border-radius: 10px;
+  }
+  </style>
+  <!-- 游戏截图+简介 -->
+  <div class="mod-con con-jietu" ng-class="isExpandSnapShot? '' : 'close'">
+    <div class="hd" ng-click="screenShotExpandClick()"><h2 bo-text="imageList.length>0 ? '游戏截图' : '游戏信息'"></h2><span class="icon-arrow"></span></div>
+    <div class="bd" bo-style="{'position':'relative'}">
+      <div bo-if="imageList.length>0" class="horSlide game-photo"
+           ng-touch-start="setPageScroll(false)"
+           ng-touch-cancel="setPageScroll(true)"
+           ng-touch-end="setPageScroll(true)" style="background: #fff;">
+        <ul scrollable="true"
+            parameters="{{ {scrollX : true, scrollY: false, scrollbars:'custom' ,bounce : false, momentum : true} }}"
+            bo-style="{'height':imageHeight + 'px'}"  class="slideWrap"><!-- -->
+          <li bo-style="{'height':imageHeight + 'px'}" ng-repeat="image in imageList" ng-click="showSlideShow($index)">
+            <div bo-style="{'height':imageHeight + 'px', border: 'none', background: 'url(images/defaultshot_' + imageDisplayType + '.png) no-repeat'}" bo-class="'mWrap '+ imageClassName">
+              <img ng-src="{{image.imgUrl}}" bo-class="imageClassName" style="border: none;" />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="intro-content" bo-if="gameInfo.detail.description">
+        <h3>简介:</h3>
+        <p bo-html="gameInfo.detail.description" ng-class="descriptionClass"></p>
+        <div ng-if="!descriptionClass" ng-click="showMoreDescription()" class="con-more">更多</div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="isExpandSnapShot">
+      <div detailgame-autoresize></div>
+  </div>
+
+  <!-- 玩家必读 -->
+  <div class="mod-con con-wanjia" bo-if="gameInfo.base.isSimple && gameInfo.detail.versionUpdateDesc">
+    <div class="hd"><h2>玩家必读</h2></div>
+    <div class="bd">
+      <div class="intro-content">
+        <p bo-html="gameInfo.detail.versionUpdateDesc" ng-class="mustReadClass"></p>
+        <div ng-if="!mustReadClass" ng-click="showMoreMustRead()" class="con-more">更多</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 礼包发号 -->
+  <div ng-if="!gameInfo.base.isSimple && giftList.length" class="mod-con con-gift">
+      <div class="hd"><h2>礼包发号</h2><span class="more" ng-click="goGiftList()">更多</span></div>
+      <div class="bd">
+          <ul simple-gift-list="giftList" game-info = "gameInfo" class="item-gift"></ul>
+      </div>
+  </div>
+
+  <!-- 资讯活动 -->
+  <div class="mod-con con-zixun" bo-if="!gameInfo.base.isSimple">
+    <div class="hd"><h2>资讯活动</h2><span class="more" ng-click="goMoreArticleList('/article/list-news.html', 1, 1)">更多</span></div>
+    <div class="bd">
+      <ul class="news-list">
+        <li class="news-main" bo-if="topNews" ng-click="goArticleDetail(topNews.id, topNews.cateId,'zq_xq-zxhd', {p1:'xq_zxhd',position:5})">
+          <a>
+            <div class="name"><span class="word-yellow" bo-text="topNews.catename|limitTo:2"></span><span bo-text="topNews.title"></span></div>
+            <div class="info" bo-text="topNews.summary|removeHtml"></div>
+          </a>
+        </li>
+        <li ng-repeat="item in articleList|limitTo:3" ng-click="goArticleDetail(item.id, item.cateId,'zq_xq-zxhd',{p1:'xq_zxhd',position:6+$index})">
+          <a><span bo-class="['word-orange', 'word-green', 'word-blue', 'word-yellow'][$index%4]" bo-text="item.catename|limitTo:2"></span><span bo-text="item.title"></span></a>
+        </li>
+      </ul>
+
+      <ul class="news-guide">
+        <li ng-click="goMoreArticleList('/article/list-news.html', 1,2)"><a>新闻资讯</a></li>
+        <li ng-click="goMoreArticleList('/article/list-activity.html', 2, 3)"><a>热门活动</a></li>
+        <li ng-click="goMoreArticleList('/article/list-broke.html', 3, 4)"><a href>爆料评测</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 新手指引 -->
+  <div class="mod-con con-xinshou" bo-if="!gameInfo.base.isSimple && referenceList.length">
+    <div class="hd"><h2>新手指引</h2></div>
+    <div class="bd">
+      <ul class="news-guide">
+        <li ng-repeat="item in referenceList">
+          <a ng-click="goArticleDetail(item.id, 'guide', '',{p1:'xq_xszy',position:$index + 1})">
+            <span bo-text="item.title"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 攻略大全 -->
+  <div class="mod-con con-gonglue" ng-if="isShowGuide && (guideList.length+guideCategoryList.length>0)">
+    <div class="hd"><h2>攻略大全</h2><span class="more" ng-click="goMoreGuide()">更多</span></div>
+    <div class="bd">
+      <ul class="news-list" bo-if="guideList.length">
+        <li ng-repeat="item in guideList" ng-click="goArticleDetail(item.id, 'guide','zq_xq-gldq',{p1:'xq_gldq',position:2+$index})">
+          <a><span bo-class="['word-orange', 'word-green', 'word-blue', 'word-yellow'][$index%4]" bo-text="item.catename|limitTo:2"></span><span bo-text="item.title"></span></a>
+        </li>
+      </ul>
+      <ul class="news-guide" bo-if="guideCategoryList.length">
+        <li ng-repeat="item in guideCategoryList">
+          <a ng-click="goGuideCategoryDetail(item, $index)" bo-text="item.cateName"></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 玩家论坛 -->
+  <div class="mod-con con-gonglue" ng-if="isShowForum && forumList.length">
+    <div class="hd"><h2>玩家论坛</h2><span class="more" ng-click="goMoreForum()">更多</span></div>
+    <div class="bd">
+      <ul class="news-list">
+        <li ng-repeat="item in forumList" ng-click="goForum(item,$index)"><a bo-text="item.title"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 评论 -->
+  <div class="mod-con con-review" ng-if="false">
+    <div class="hd"><h2>游戏评论</h2><span class="more">更多</span></div>
+    <div class="bd">
+      <div class="review-score">
+        <div class="total-score">
+          <div class="score-title">平均评分</div>
+          <div class="score">9.5</div>
+          <p class="review-start"><span class="good"></span><span class="good"></span><span class="good"></span><span class="soso"></span><span></span></p>
+        </div>
+        <ul class="score-count">
+          <li><span class="label">5星</span><span class="strip"><span class="bg" style="width:74%">1888</span></span></li>
+          <li><span class="label">4星</span><span class="strip"><span class="bg" style="width:60%">190</span></span></li>
+          <li><span class="label">3星</span><span class="strip"><span class="bg" style="width:40%">128</span></span></li>
+          <li><span class="label">2星</span><span class="strip"><span class="bg" style="width:10%">36</span></span></li>
+          <li><span class="label">1星</span><span class="strip"><span class="bg" style="width:6%">6</span></span></li>
+        </ul>
+      </div>
+      <div class="btn-review">我要打分评论</div>
+      <h3>玩家评论 <span class="count">(1999)</span></h3>
+      <div class="review-con">
+        <ul>
+          <li>
+            <span class="user">花花同学</span>
+            <span class="review-start"><span class="good"></span><span class="good"></span><span class="good"></span><span class="soso"></span><span></span></span>
+            <span class="time">2014-07-11</span>
+            <div class="con">画面精美，强烈期待啊，赶紧公测吧！</div>
+            <div class="zan">120赞</div>
+            <div class="reply">6回应</div>
+            <div class="phone">机型：VIVO Xplay</div>
+          </li>
+          <li>
+            <span class="user">花花同学</span>
+            <p class="review-start"><span class="good"></span><span class="good"></span><span class="good"></span><span class="soso"></span><span></span></p>
+            <span class="time">2014-07-11</span>
+            <div class="con">画面精美，强烈期待啊，赶紧画面精美，强烈期待啊，赶紧画面精美，强烈期待啊，赶紧画面精美，强烈期待啊，赶紧画面精美，强烈期待啊，赶紧画面精美，强烈期待啊，赶紧公测吧！</div>
+            <div class="zan">120赞</div>
+            <div class="reply">6回应</div>
+            <div class="phone">机型：VIVO Xplay</div>
+          </li>
+          <li>
+            <span class="user">花花同学</span>
+            <p class="review-start"><span class="good"></span><span class="good"></span><span class="good"></span><span class="soso"></span><span></span></p>
+            <span class="time">2014-07-11</span>
+            <div class="con">sdgfasdfasdfasdfasdfsadfasdfasdfsdgfasdfasdfasdfasdfsadfasdfasdfsdgfasdfasdfasdfasdfsadfasdfasdfsdgfasdfasdfasdfasdfsadfasdfasdf</div>
+            <div class="zan">120赞</div>
+            <div class="reply">6回应</div>
+            <div class="phone">机型：VIVO Xplay</div>
+          </li>
+          <li class="none-review">暂无评论，快来抢沙发~</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 相关信息 -->
+  <div class="mod-con con-xiangguan">
+    <div class="hd"><h2>相关信息</h2></div>
+    <div class="bd">
+      <ul class="help-info">
+        <li><span class="label">当前版本：</span><span bo-text="gameInfo.detail.versionName || '未知'"></span></li>
+        <li><span class="label">更新时间：</span><span bo-text="gameInfo.base.uploadTime|limitTo:10"></span></li>
+        <li><span class="label">客服信息：</span><span bo-text="gameInfo.detail.customerInfo || '暂无'"></span></li>
+      </ul>
+      <div class="btn-help-link"><a ng-click="goArticleDetail(82759, 'guide', '',{p1:'xq_xgxx',position:1})">常见问题</a><a ng-click="reportGame(gameInfo)">举报反馈</a></div>
+    </div>
+  </div>
+</div>

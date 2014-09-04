@@ -1,0 +1,18 @@
+<div class="article_detail">
+  <div ng-init="statInfo={a1:'xqy_xq'}" ng-click="goGameDetail(gameInfo)" ng-include="'modules/shared/singleGame.tpl.html'"></div>
+  <div ng-if="articleInfo" bindonce="articleInfo" class="article-content">
+    <h3 bo-text="articleInfo.title"></h3>
+    <h4><span bo-text="articleInfo.modifyTime"></span>&nbsp;&nbsp;<span bo-if="articleInfo.author" bo-text="'by ' + articleInfo.author"></span></h4>
+    <div class="article-text adapter_atc" style="border-top: none;word-break:break-all;word-wrap:break-word;" bo-html="articleInfo.content">
+    </div>
+  </div>
+  <!--攻略-->
+  <div ng-if="articleList" bindonce="articleList" class="mod-con">
+    <div class="hd"><h2 bo-text="typeName"></h2></div>
+    <div class="bd">
+      <ul class="mod-list">
+        <li ng-repeat="article in articleList" ng-click="goArticleDetail(article)" bo-text="'【' + article.catename + '】'+ article.title"></li>
+      </ul>
+    </div>
+  </div>
+</div>

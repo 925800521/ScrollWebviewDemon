@@ -1,0 +1,16 @@
+<div class="home-con more-gift more-gift-list"  ng-if="gameGiftList.length">
+    <ul class="item-list-act">
+        <li class="item-act" ng-repeat="item in gameGiftList" ng-click="toList(item, $index)">
+            <div class="game-con">
+                <div class="pic" >
+                        <img ng-if="item.game.logourl" ng-src="{{item.game.logourl}}" hide-on-error='hide' width="60" height="60" >
+                </div>
+                <div class="con">
+                    <div class="name">{{item.game.shortName}}</div>
+                    <div class="info">今天新增：<span class="em">{{item.giftSummary.newCount}}</span></div>
+                    <div class="info">礼包总数：<span class="em">{{item.giftSummary.giftTotal}}</span></div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

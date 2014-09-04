@@ -1,0 +1,20 @@
+<div class="detail-notice" marquee="true" parameters="{{ {duration:3000} }}">
+    <p>
+        <span ng-repeat="item in notice">{{item.msg}}</span>
+    </p>
+</div>
+
+<div class="detail-diary">
+    <div class="detail-diary-con">
+        <ul scrollable="true"
+            parameters="{{ {scrollX : true, scrollY: false, center : '.scroll-center', prev : '.diary-pre', next : '.diary-next'} }}">
+            <li ng-repeat="item in diary" class="{{ {0:'status-gray',1:'status-orange',2:'status-green'}[item.type] }} {{ item.milestone ? 'scroll-center':'' }}">
+                <span class="status">{{ item.title }}</span>
+                <span class="time">{{item.date}}</span>
+                <em class="point"></em>
+            </li>
+        </ul>
+    </div>
+    <div class="diary-pre">上一个</div>
+    <div class="diary-next">下一个</div>
+</div>

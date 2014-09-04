@@ -1,0 +1,63 @@
+<div class="game-detail" >
+  <div class="mod-con con-pingfen">
+    <div class="hd"><h2>评分</h2></div>
+    <div class="bd">
+      <div class="title-comment" ng-init="markZH=['差劲', '较差', '还行', '好玩', '力荐']">
+        <p class="title" ng-bind="'我的评分:'+markZH[curIndex]" ></p>
+        <div class="start-content">
+
+          <ul class="start-wrap">
+            <li ng-repeat="i in [0,1,2,3,4]">
+              <i ng-class="{'well':curIndex>=i}" ng-click="chooseMark(i)"></i>
+            </li>
+          </ul>
+          <!--<ul  class="start-wrap" ng-init="curIndex=-1">-->
+            <!--<li><i ng-class="{'well':m.curIndex>=0,'':m.curIndex<0}" ng-click="m={curIndex:0,mark:'差劲'}"></i></li>-->
+            <!--<li><i ng-class="{'well':m.curIndex>=1,'':m.curIndex<1}" ng-click="m={curIndex:1,mark:'较差'}"></i></li>-->
+            <!--<li><i ng-class="{'well':m.curIndex>=2,'':m.curIndex<2}" ng-click="m={curIndex:2,mark:'还行'}"></i></li>-->
+            <!--<li><i ng-class="{'well':m.curIndex>=3,'':m.curIndex<3}" ng-click="m={curIndex:3,mark:'好玩'}"></i></li>-->
+            <!--<li><i ng-class="{'well':m.curIndex==4,'':m.curIndex<4}" ng-click="m={curIndex:4,mark:'力荐'}"></i></li>-->
+          <!--</ul>-->
+          <p class="start-ctrl">
+            <span ng-class="'btn-primary'+btnMarkClass" ng-click="doMark(curIndex)"
+                  ng-bind="markStatus"></span>
+          </p>
+        </div>
+      </div>
+      <div class="toggle-wrap">
+        <p class="title"><span ng-bind="'我的机型: '+modelName"></span><span ng-bind="playDesc"></span></p>
+        <div class="toggle-btn-group">
+          <span class="btn{{playOkClass}}" ng-click="doPlay(true,'1','btn_canplay')">可以玩</span>
+          <span class="btn{{playNoClass}}" ng-click="doPlay(false,'-1','btn_cannotplay')">不可玩</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mod-con con-comment">
+    <div class="hd"><h2>评论</h2></div>
+    <div class="bd">
+      <ul class="mod-nav">
+        <li ng-class="{on:orderby==0}" ng-click="showComment(0)">时间排序</li>
+        <li ng-class="{on:orderby==1}" ng-click="showComment(1)">人气排序</li>
+      </ul>
+      <ul class="cell-list-content">
+        <li ng-repeat="comment in commentList">
+          <div ng-show="comment" >
+            <h5><span ng-bind="comment.nickName||'九游玩家'"></span>
+              <span class="time" ng-bind="comment.createTime|slice:0:10"></span></h5>
+            <p class="cell-text" ng-bind="comment.comment"></p>
+            <div class="cell-info" ng-init="setMyVoteStyle(comment)">
+              <span class="phone-class" ng-bind="comment.modelType"></span> <br ng-show="comment.hideVote" />
+              <span ng-hide="comment.hideVote" ng-class="comment.voteUpClass" ng-click="voteUp(comment)">
+                <i class="well"></i><span style="padding-left: 0px;margin-left: 0px;" ng-bind="comment.up"></span>
+              </span>
+              <span ng-hide="comment.hideVote" ng-class="comment.voteDownClass" ng-click="voteDown(comment)">
+                <i class="bad"></i><span style="padding-left: 0px;margin-left: 0px;" ng-bind="comment.down"></span>
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

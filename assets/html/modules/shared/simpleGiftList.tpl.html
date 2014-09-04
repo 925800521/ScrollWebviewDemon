@@ -1,0 +1,12 @@
+<li ng-repeat="item in giftList" ng-show="item.sceneId" gift-item="item">
+    <div class="pic-gift" ng-click="redirectToDetail(item, $index)" ></div>
+    <div class="con" ng-click="redirectToDetail(item, $index)">
+        <div class="name">{{item.name}}</div>
+        <div class="info">{{item.filterBody}}</div>
+    </div>
+    <span ng-if="!customCfg.isLoading" ng-click="btnClick(item)" ng-class="customCfg.btnClass">{{customCfg.btnText}}</span>
+    <span ng-if="customCfg.isLoading" ng-click="btnClick(item)" class="btn-primary-dis">请等待</span>
+</li>
+
+
+

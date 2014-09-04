@@ -1,0 +1,36 @@
+<div ng-if="groupGameList.length>0"  class="new-rec">
+  <div ng-repeat="groupItem in groupGameList" bindonce="groupItem" ng-class="groupItem.groupClass">
+  <div class="daytime-tips" bo-text="groupItem.groupName + '(' + groupItem.groupTotal + ')'"><i class="tl-point"></i></div>
+  <ul id={{groupItem.groupId}} ngm-game-list="groupItem.gameList" ngm-game-list-key="{{'groupItem.gameList' + $index}}">
+    <li ng-repeat="gameInfo in groupItem.gameList" bindonce="gameInfo" gameId="{{gameInfo.base.gameId}}" adpId="{{gameInfo.adm.adpId}}" admId="{{gameInfo.adm.admId}}" ng-click="goGameDetail(gameInfo)" class="item-game">
+      <div class="pic">
+        <span class="pic-mask">
+          <img ng-src="{{gameInfo.ui.data.gameIcon}}" hide-on-error='hide' width="60" height="60">
+        </span>
+        <span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+      </div>
+      <div class="con" ng-switch="gameInfo.ui.region">
+        <div class="name"><span bo-text="gameInfo.base.gameName"></span><span class="icon-good" bo-if="gameInfo.status.excellent=='9'"></span></div>
+        <div class="info" ng-switch-when="info"><span bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus"></span><span
+                class="space" bo-if="gameInfo.base.fileSize&&((gameInfo.base.isSimple&&gameInfo.base.category)||(!gameInfo.base.isSimple&&gameInfo.base.opStatus))">|</span><span bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+        </div>
+        <div class="info" ng-switch-when="info" bo-text="gameInfo.detail.instruction||'近期上线的人气新游，吐血推荐'"></div>
+
+        <!-- BEGIN 状态信息-->
+        <div class="info" ng-switch-when="state">{{gameInfo.ui.stateText}}</div>
+        <!-- BEGIN 状态信息-->
+
+        <!-- BEGIN 进度信息-->
+        <div class="progress" ng-switch-when="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div>
+        <div class="info down-info" ng-switch-when="progress">
+          <span bo-class="{'icon-gprs': gameInfo.ui.data.network=='3g' || gameInfo.ui.data.network=='2g', 'icon-wifi': gameInfo.ui.data.network=='wifi'}"></span>{{gameInfo.ui.stateText}}<span class="percent" ng-if="gameInfo.ui.data.progress">{{gameInfo.ui.data.progress}}%</span>
+        </div>
+        <!-- END 进度信息-->
+      </div>
+      <!-- BEGIN 下载按钮-->
+      <div class="btns" ng-click="gameInfo.ui.clickBtn(gameInfo, {a1:'xp_xysx',ada1:'xp_xysx',adpId:gameInfo.adm.adpId}, $event)"><span ng-class="'btn-primary'+gameInfo.ui.btnStyle" ng-bind="gameInfo.ui.btnText||'下载'"></span></div>
+      <!-- END 下载按钮-->
+    </li>
+  </ul>
+  </div>
+</div>

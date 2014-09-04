@@ -1,0 +1,67 @@
+.act-child{background-image:url(../images/child/bg_body.png); background-size:320px auto; overflow-x:hidden; min-width:320px; background-repeat:repeat-x;} 
+.act-child-none{background-image:url(../images/child/bg_body_none.png);} 
+.act-back,
+.act-refresh,
+.act-child h1,
+.child-wheel .btn-wheel,
+.child-wheel .btn-wheel-text,
+.act-tree,
+.child-mygift a,
+.icon-completed::after{ background-image:url(../images/child/bg_main.png); background-size:260px auto;}
+.act-child header{ position:relative; width:320px; height:534px; margin:0 auto; z-index:5;  }
+.act-child-none header{ height:494px;}
+.act-child{ position:relative}
+.act-child .act-back,
+.act-child .act-refresh{ display:block; width:32px; height:32px;position:absolute; top:6px; line-height:300px; overflow:hidden; z-index:10;}
+.act-child .act-back{ background-position:-32px -140px; left:10px;}
+.act-child .act-refresh{background-position:0 -140px;right:10px;}
+.act-child-none .act-back{ background-position:-96px -140px;}
+.act-child-none .act-refresh{ background-position:-64px -140px; }
+.icon-completed::after{ display:block; content:""; width:52px; height:30px; background-position:-172px -520px; float:right; position:absolute; right:1px; top:-8px;}
+
+.act-child h1{ width:260px; height:128px; margin-left:-130px; position:absolute; left:50%; top:14px; line-height:90000px; overflow:hidden;}
+.act-child-none h1{ background-position:0 -380px;}
+
+.act-child .child-count{ width:290px;margin-left:-145px; position:absolute; left:50%; top:146px; text-align:right; color:#3674B2; font-size:12px;line-height:16px;}
+.act-child .count{ display:inline-block; background:#F17070; color:#FFF; font-size:12px; font-weight:bold; height:16px; line-height:16px;padding:0 4px;-webkit-border-radius:20px;border-radius:20px;}
+.act-child .child-wheel{ width:308px; height:332px; background:url(../images/child/bg_wheel.png); background-size:308px auto; position:absolute; left:50%; margin-left:-154px; bottom:49px;}
+.act-child-none .child-wheel{ bottom:9px;}
+.child-wheel .btn-wheel,
+.child-wheel .btn-wheel-text{ width:86px; height:100px; position:absolute; left:111px; top:106px;}
+.child-wheel .btn-wheel{ background-position:0 -174px;-webkit-transform-origin:43px 56px;}
+.child-wheel-dis .btn-wheel{ background-position:-86px -174px;}
+.child-wheel .btn-wheel-text{ background-position:0 -280px;}
+.child-wheel-dis .btn-wheel-text{ background-position:-86px -280px;}
+.act-child .act-tree{ width:80px; height:128px; background-position:-180px -152px; position:absolute; left:281px; bottom:62px;}
+.act-child-none .act-tree{ bottom:22px;}
+.act-child .child-title{ height:54px; margin:0 12px 20px 12px; font-size:14px; color:#666; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center; background-image:url(../images/child/act_border.png); background-size:2px auto; background-repeat:repeat-x; background-position:left bottom;}
+.act-child .child-rule{ margin:0 12px;}
+.child-rule h3{ font-size:14px; color:#313131; font-weight:normal;}
+.child-rule p{ font-size:12px; line-height:18px; color:#666; clear:both;}
+.child-rule li{ margin-bottom:11px; clear:both;}
+.child-rule li .icon-number{ margin-right:6px; position:relative; top:-1px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;width:16px; height:16px; background:#7FBCEE; -webkit-border-radius:20px;border-radius:20px; color:#FFF; font-size:12px; float:left;}
+.act-child-none .child-rule li .icon-number{ background:#7FA4EE;}
+.child-btns{ text-align:center; padding:20px;}
+.child-btns .btn-feedback{width:160px; height:30px; margin:0 auto; background:#7FBCEE; display:-webkit-box;
+-webkit-box-pack:center;-webkit-box-align:center; color:#FFF; font-size:14px;-webkit-border-radius:3px;border-radius:3px;}
+.act-child-none  .child-btns .btn-feedback{ background:#7FA4EE}
+/*活动页*/
+.child-gift-count{ padding-bottom:5px; margin:0 12px 15px 12px; background-image:url(../images/child/act_border.png); overflow:hidden; background-size:2px auto; background-repeat:repeat-x; background-position:left bottom;}
+.child-gift-count h3{ font-size:14px; color:#313131; text-align:center; font-weight:normal; line-height:54px; height:50px;}
+.child-gift-count li{font-size:12px; color:#313131; clear:both; margin-bottom:12px; float:left; position:relative; clear:both;}
+.child-gift-count li .icon-number{ margin-right:6px; position:relative; top:-1px; display:-webkit-box;-webkit-box-pack:center;-webkit-box-align:center;width:16px; height:16px; background:#7FBCEE; border-radius:20px;border-radius:20px; color:#FFF; font-size:12px; float:left;}
+.child-gift-count li .c-blue{ color:#488DE1; padding:0 2px;}
+.child-game-list h3{ font-size:14px; padding-left:16px; color:#313131; font-weight:normal;}
+.child-game-list .netgame-hot-list .item-act{ background:none; padding-bottom:4px;}
+.child-game-list .netgame-hot-list .con,
+.child-game-list .netgame-hot-list .btns{ text-align:center;}
+.child-game-list .netgame-hot-list{ margin:0 12px 16px 12px; padding:0 0 13px 0;background-image:url(../images/child/act_border.png); background-size:2px auto; background-repeat:repeat-x; background-position:left bottom;}
+.child-mygift{ position:absolute;left:0; right:0; bottom:10px;}
+.child-mygift a{ display:block; width:160px; height:30px; overflow:hidden; line-height:900px; background-position: 0 -520px; margin:0 auto;}
+
+
+
+
+
+
+

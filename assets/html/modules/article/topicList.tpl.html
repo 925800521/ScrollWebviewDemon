@@ -1,0 +1,10 @@
+<ul class="oldnews-list">
+  <li class="item-news" ng-repeat="item in articleList track by item.id" bindonce="item" ng-click="goArticleDetail(item)">
+    <div class="pic"><img ng-src="{{item.imgUrl}}" width="72" height="72"></div>
+    <div class="con">
+      <div class="name" bo-text="item.title"></div>
+      <div class="mix-info" bo-text="(item.summary||item.content)|removeHtml"></div>
+      <div class="date" bo-text="item.modifyTime | slice:5:10"></div>
+    </div>
+  </li>
+</ul>

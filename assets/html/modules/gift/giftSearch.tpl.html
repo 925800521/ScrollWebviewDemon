@@ -1,0 +1,38 @@
+<!--礼包搜索结果 开始-->
+  <!--搜索框-->
+<autocomplete ng-model="keyword"
+              attr-placeholder="输入礼包关键字"
+              click-activation="true"
+              init-auto = false
+              search="search(keyword)">
+</autocomplete>
+
+  <!--按游戏排序结果-->
+  <div class="result-con search-game-result" ng-if="gameList.length">
+  <div class="hd"><h2>结果按游戏排序</h2></div>
+  <ul>
+    <li class="item-game" ng-repeat="item in gameList" ng-click="toList(item)">
+      <div class="pic">
+          <img ng-if="item.game.logourl" ng-src="{{item.game.logourl}}" hide-on-error='hide' width="60" height="60">
+      </div>
+      <div class="con">
+        <div class="name"><span ng-bind="item.game.name"></span></div>
+        <div class="info">今日新增：<span class="em" ng-bind="item.giftSummary.newCount"></span></div>
+        <div class="info">礼包总数：<span class="em" ng-bind="item.giftSummary.giftTotal"></span></div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+  <!--按礼包排序结果-->
+  <div class="result-con search-gift-result">
+    <div class="hd" ng-if="giftList.length"><h2>结果按礼包排序</h2></div>
+    <ul gift-list="giftList" class="mod-con gift-list-con" no-pic="true"></ul>
+  </div>
+<!--礼包搜索结果 结束-->
+
+<!-- 搜索无结果 -->
+<div id="Empty" ng-if="empty">
+    <div class="error-info" ng-style="{'padding-top':imageMarginHeight+'px'}"><img src="images/empty.png" width="140" height="140" /><p ng-bind="tipMessage"></p></div>
+</div>
+

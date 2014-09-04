@@ -1,0 +1,38 @@
+<div id='imgSwipe' class='swipe default-img' selectedIndex="{{selectedIndex}}" ng-style="{'height': imageHeight + 'px'}">
+    <div ng-if="carousel.length==2" class='swipe-wrap' desc="eq 2 has a bug">
+        <div class='wrap' ng-style="{'width': imageWidth + 'px','height': imageHeight + 'px'}"
+             id="jdt_image_{{$index}}" gameId={{item.gameId}} adpId="{{carouselAdpId}}" admId="{{item.admId}}"
+             ng-repeat="item in carousel" ng-click="clickCarouselFn(item,$index,carouselAdpId)">
+            <div>
+                <img ng-src="{{item.logo||item.imageUrl}}" hide-on-error="hide"
+                     ng-style="{'width': imageWidth + 'px','height': imageHeight + 'px'}" >
+                <div ng-if="imageDisabled==1" class="title">{{item.title||item.adWord}}</div>
+            </div>
+        </div>
+        <div class='wrap' ng-style="{'width': imageWidth + 'px','height': imageHeight + 'px'}"
+             id="jdt_image_{{$index+2}}" gameId={{item.gameId}} adpId="{{carouselAdpId}}" admId="{{item.admId}}"
+             ng-repeat="item in carousel" ng-click="clickCarouselFn(item,$index,carouselAdpId)">
+            <div>
+                <img ng-src="{{item.logo||item.imageUrl}}" hide-on-error="hide"
+                     ng-style="{'width': imageWidth + 'px','height': imageHeight + 'px'}" >
+                <div ng-if="imageDisabled==1" class="title">{{item.title||item.adWord}}</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="carousel.length!=2" class='swipe-wrap'>
+        <div class='wrap' ng-style="{'width': imageWidth + 'px','height': imageHeight + 'px'}"
+             id="jdt_image_{{$index}}" gameId={{item.gameId}} adpId="{{carouselAdpId}}" admId="{{item.admId}}"
+             ng-repeat="item in carousel" ng-click="clickCarouselFn(item,$index,carouselAdpId)">
+            <div>
+                <img ng-src="{{item.logo||item.imageUrl}}" hide-on-error="hide"
+                     ng-style="{'width': imageWidth + 'px','height': imageHeight + 'px'}" >
+                <div ng-if="imageDisabled==1" class="title">{{item.title||item.adWord}}</div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="carousel.length>1" id="change_img_nav">
+        <ul id="change_img_nav_ul">
+            <li ng-class="{'active':selectedIndex==$index}" ng-repeat="item in carousel"></li>
+        </ul>
+    </div>
+</div>

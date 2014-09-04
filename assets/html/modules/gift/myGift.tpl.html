@@ -1,0 +1,76 @@
+<!--礼包 我的礼包 开始-->
+<div class="mod-con gift-my" ng-switch="myGiftTab">
+    <ul class="mod-nav">
+        <li ng-class="{'on': myGiftTab=='get' }" ng-click="switchTab(1)">已领</li>
+        <li ng-class="{'on': myGiftTab=='dredge' }" ng-click="switchTab(2)">已淘</li>
+        <li ng-class="{'on': myGiftTab=='subscribe' }" ng-click="switchTab(3)">已预订</li>
+    </ul>
+
+    <ul ng-switch-when="get">
+        <li class="item-number" ng-repeat="item in getGiftList" >
+            <div class="item-game" ng-click="goGiftDetail(item)">
+                <div class="pic"><img ng-if="item.iconUrl" ng-src="{{item.iconUrl}}" hide-on-error='hide'
+                                      width="60" height="60" onerror="javascript:this.style.display='none';"/></div>
+                <div class="con">
+                    <div class="name" ng-bind="item.title"></div>
+                    <div class="info" ng-if="item.giftSynInfo">兑换期限：</div>
+                    <div class="info" ng-if="item.giftSynInfo">{{item.giftSynInfo.exchangeStarttime|formatDate:'yyyy-MM-dd hh:mm'}} 到 {{item.giftSynInfo.exchangeEndtime|formatDate:'yyyy-MM-dd hh:mm'}}</div>
+                </div>
+            </div>
+            <div class="info-code" ng-if="item.isTransfer!=1" data-ng-repeat="code in item.codeList">
+                <div class="code-con">
+                    <label ng-bind="code.property+'：'"></label>
+                    <span class="em" ng-bind="code.code"></span>
+                </div>
+                <span ng-if="item.giftSynInfo.exchangeValid&&item.isTransfer!=1" class="btn-copy" ng-click="copyCode($event,code.code)">复制</span>
+                <span ng-if="!item.giftSynInfo.exchangeValid" class="btn-expired">已过期</span>
+            </div>
+            <div class="info-code" ng-if="item.isTransfer==1&&item.packageName">
+                <div class="code-con">
+                    <span class="text">已提交游戏资料，登录游戏即可</span>
+                </div>
+                <span class="btn-copy" ng-click="openGame(item)">打开</span>
+            </div>
+        </li>
+    </ul>
+
+
+    <ul  ng-switch-when="dredge">
+        <li class="item-number" ng-repeat="item in dredgeGiftList">
+            <div class="item-game" ng-click="goGiftDetail(item)">
+                <div class="pic"><img ng-if="item.iconUrl" ng-src="{{item.iconUrl}}" hide-on-error='hide'
+                                      width="60" height="60" onerror="javascript:this.style.display='none';"/></div>
+                <div class="con">
+                    <div class="name" ng-bind="item.title"></div>
+                    <div class="info">淘到的号不保证一定能兑换,请尽快使用。</div>
+                </div>
+            </div>
+            <div class="info-code" data-ng-repeat="code in item.codeList">
+                <div class="code-con">
+                    <label ng-bind="code.property+'：'"></label>
+                    <span class="em" ng-bind="code.code"></span>
+                </div>
+                <span class="btn-copy" ng-click="copyCode(code.code)">复制</span>
+            </div>
+        </li>
+    </ul>
+
+    <ul class="mod-con gift-list-con" ng-switch-when="subscribe">
+        <li class="item-number" ng-repeat="item in subscribeGiftList" >
+            <div class="item-game" ng-click="goGiftDetail(item)">
+                <div class="pic"><img ng-if="item.iconUrl" ng-src="{{item.iconUrl}}" hide-on-error='hide'
+                                      width="60" height="60" onerror="javascript:this.style.display='none';"/></div>
+                <div class="con">
+                    <div class="name" ng-bind="item.title"></div>
+                    <div class="info">请留意通知栏消息</div>
+                </div>
+                <div class="btns"><span class="btn-primary-long" data-ng-click="unsubscribeGift($event,item)">取消预订</span></div>
+            </div>
+        </li>
+    </ul>
+
+    <div id="empty" ng-if="isEmpty" style="display: none">
+        <div class="error-info"  ng-style="{'padding-top':ImageMarginHeight+'px'}"><img src="images/empty.png" width="140" height="140" /><p ng-bind="tipMessage"></p></div>
+    </div>
+</div>
+<!--礼包 我的礼包 结束-->

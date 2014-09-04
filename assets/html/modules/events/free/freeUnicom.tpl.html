@@ -1,0 +1,55 @@
+<style>
+  .loading-text, .loading-fail{color: #FFF;}
+</style>
+<div class="free-unicom">
+  <div class="free-top">
+    <h1>免流量，下游戏不花钱！</h1>
+    <img src="images/unicom/free_top.png" width="100%">
+    <!--开发说明：该按钮需要占位，隐藏请用 visibility:hidden-->
+    <div class="free-btn">已节省<span class="count" ng-bind="fileSize | formatSize:1"></span>&nbsp;&nbsp;&nbsp;&nbsp;约<span class="count" ng-bind="fileSize/1024/1024*0.618 | number:1"></span>元</div>
+  </div>
+  <div class="free-top-con">
+    <img src="images/unicom/free_top_bg.png" width="100%" height="179">
+    <p class="free-con">只要您是 <span class="strong">联通用户</span>，下<br>载专区内的游戏所产生的流量费用均<br>由九游帮您支付！<br><a ng-click="share()">分享给好友&gt;&gt;</a></p>
+  </div>
+
+  <!-- 游戏列表 -->
+  <div ngm-game-list="gameList">
+    <div class="item-game" ng-repeat="gameInfo in gameList" bindonce="gameInfo" ng-click="goGameDetail(gameInfo, $index)">
+      <!-- BEGIN 游戏图标-->
+      <div class="pic">
+        <span class="pic-mask">
+          <img ng-src="{{gameInfo.base.gameIcon}}" hide-on-error='hide' width="60" height="60">
+        </span>
+        <span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+        <span ng-if="gameInfo.status.starting" class="icon-starting"></span>
+      </div>
+      <!-- END 游戏图标-->
+      <!--详细信息-->
+      <div class="con" ng-switch="gameInfo.ui.region">
+        <div class="name"><span bo-text="gameInfo.base.gameName"></span><span class="icon-good" bo-if="gameInfo.status.excellent=='9'"></span></div>
+        <!-- BEGIN 概要信息-->
+        <div ng-switch-when="info">
+          <div class="info"><span bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus"></span> <span class="space" ng-if="gameInfo.base.fileSize">|</span> <del bo-text="gameInfo.base.fileSize | formatSize:1"></del></div>
+          <div class="mix-info" bo-text="gameInfo.adm.adWord||gameInfo.detail.instruction"></div>
+        </div>
+        <!-- END 概要信息-->
+
+        <!-- BEGIN 状态信息-->
+        <div class="info" ng-switch-when="state">{{gameInfo.ui.stateText}}</div>
+        <!-- BEGIN 状态信息-->
+
+        <!-- BEGIN 进度信息-->
+        <div class="progress" ng-switch-when="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div>
+        <div class="info down-info" ng-switch-when="progress">
+          <span ng-class="{'icon-gprs': gameInfo.ui.data.network=='3g' || gameInfo.ui.data.network=='2g', 'icon-wifi': gameInfo.ui.data.network=='wifi'}"></span>{{gameInfo.ui.stateText}}<span class="percent" ng-if="gameInfo.ui.data.progress">{{gameInfo.ui.data.progress}}%</span>
+        </div>
+        <!-- END 进度信息-->
+      </div>
+      <!-- END 详细信息-->
+      <!-- BEGIN 下载按钮-->
+      <div class="btns" ng-click="countDownLoad(gameInfo, gameInfo.ui);gameInfo.ui.clickBtn(gameInfo, statInfo, $event)"><span ng-class="'btn-primary'+gameInfo.ui.btnStyle" ng-bind="gameInfo.ui.btnText"></span></div>
+      <!-- END 下载按钮-->
+    </div>
+  </div>
+</div>

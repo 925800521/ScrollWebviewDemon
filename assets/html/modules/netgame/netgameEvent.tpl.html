@@ -1,0 +1,39 @@
+<div class="new-rec">
+  <div ng-repeat="groupGame in groupGameList" ng-if="groupGame.gameList.length>0" ng-class="groupGame.groupClass">
+    <div class="daytime-tips">{{groupGame.groupName}}<i class="tl-point"></i></div>
+    <ul ngm-game-list="groupGame.gameList" ngm-game-list-key="{{'groupGame.gameList' + $index}}">
+      <li ng-if="gameInfo" class="item-game hidden" ng-repeat="gameInfo in groupGame.gameList"
+          ng-click="goGameDetail(gameInfo.base.gameId)">
+        <div class="pic">
+          <img ng-src="{{gameInfo.ui.data.gameIcon}}" hide-on-error='hide' width="60" height="60" alt="">
+          <span ng-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span>
+        </div>
+        <div class="con" ng-switch="gameInfo.ui.region">
+          <div class="name">{{gameInfo.base.gameName}}<span class="icon-good" ng-if="gameInfo.status.excellent=='9'"></span></div>
+          <div class="info"  ng-switch-when="info">{{gameInfo.base.isSimple &&gameInfo.base.category || gameInfo.base.opStatus}}<span class="space" ng-if="gameInfo.base.fileSize">|</span>{{gameInfo.base.fileSize | formatSize:1}}
+          </div>
+          <div class="info"  ng-switch-when="info">{{gameInfo.event.dimBeginTime || (gameInfo.event.beginTime && gameInfo.event.beginTime.substr(5,11))}}<span class="em">{{gameInfo.event.title}}</span>
+          </div>
+          <!-- BEGIN 状态信息-->
+          <div class="info" ng-switch-when="state">{{gameInfo.ui.stateText}}</div>
+          <!-- BEGIN 状态信息-->
+
+          <!-- BEGIN 进度信息-->
+          <div class="progress" ng-switch-when="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div>
+          <div class="info down-info" ng-switch-when="progress">
+            <span ng-class="{'icon-gprs': gameInfo.ui.data.network=='3g' || gameInfo.ui.data.network=='2g', 'icon-wifi': gameInfo.ui.data.network=='wifi'}"></span>{{gameInfo.ui.stateText}}<span class="percent" ng-if="gameInfo.ui.data.progress">{{gameInfo.ui.data.progress}}%</span>
+          </div>
+          <!-- END 进度信息-->
+        </div>
+
+        <!-- BEGIN 下载按钮-->
+        <div class="btns" ng-click="gameInfo.ui.clickBtn(gameInfo, statInfo, $event)"><span ng-class="'btn-primary'+gameInfo.ui.btnStyle">{{gameInfo.ui.btnText}}</span></div>
+        <!-- END 下载按钮-->
+      </li>
+    </ul>
+  </div>
+</div>
+<div ng-if="tipName" style="display: none;">
+  <div class="error-img"><img src="images/error_sad.png" width="140" height="140" /></div>
+  <p>最近没有游戏{{tipName}}</p>
+</div>

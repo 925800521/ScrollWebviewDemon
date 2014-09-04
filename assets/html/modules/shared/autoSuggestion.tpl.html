@@ -1,0 +1,16 @@
+<div class="autocomplete">
+    <div class="mod-search">
+        <div class="search-con">
+            <input type="text" id="btnSearch" ng-model="searchParam" class="search-input" placeholder="输入礼包关键字" />
+        </div>
+        <div class="search-btn"><a ng-click="search(searchParam)">搜礼包</a></div>
+    </div>
+    <div ng-if="searchParam">
+        <ul ng-show="completing" class="search-game-link">
+            <li suggestion ng-repeat="suggestion in suggestions | filter:searchFilter | orderBy:'toString()'"
+                index="{{$index}}" val="{{suggestion}}" ng-class="{active: ($index == selectedIndex)}" >
+                <a ng-click="select(suggestion)">{{suggestion.name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

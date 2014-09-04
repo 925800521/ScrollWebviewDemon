@@ -1,0 +1,14 @@
+<li class="item-number item-link" ng-repeat="item in gameGiftList" ng-click="toList(item, $index,'lbfhsy_yazyx')">
+    <div class="item-game">
+        <div class="pic" >
+            <img ng-if="item.game.logourl" ng-src="{{item.game.logourl}}" hide-on-error='hide' width="60" height="60" >
+        </div>
+        <div class="con">
+            <div class="name"><span class="title-name" ng-bind="item.game.shortName"></span></span><span class="text" ng-if="item.giftSummary.newCount>0">(今日新增：<span class="em" ng-bind="item.giftSummary.newCount"></span>)</span></div>
+            <div class="info-list" ng-class="{'icon-newlist': gift.base.newFlag==1,
+            'icon-none': (item.gifts.length==1&&gift.base.newFlag!=1)||(item.gifts.length==2&&item.gifts[0].base.newFlag!=1&&item.gifts[1].base.newFlag!=1)}"
+                 ng-repeat="gift in item.gifts" ng-bind="gift.base.truncatedName">
+            </div>
+        </div>
+    </div>
+</li>

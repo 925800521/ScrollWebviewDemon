@@ -1,0 +1,32 @@
+<!-- 礼包详情 开始 -->
+
+
+<div class="gift-detail" id="gift-detail">
+	<ul gift-list="giftList"
+        go-game-detail="goGameDetail"
+        go-gift-list="goGiftList"
+        interval = "interval"
+        game-info = "gameInfo"
+        style="display:block">
+    </ul>
+    <div class="gift-detail-con">
+        <div class="mod-con">
+            <div class="hd"><h2>每日领号时段</h2></div>
+            <div class="info-con" ng-if="item.issueControl" ng-bind="item.issueControl"></div>
+            <div class="info-con" ng-if="!item.issueControl">全天</div>
+        </div>
+        <div class="mod-con">
+            <div class="hd"><h2>礼包内容</h2></div>
+            <div class="info-con adapter_atc"  style="word-break:break-all;word-wrap:break-word"  ng-bind-html="item.body"></div>
+        </div>
+        <div class="mod-con">
+            <div class="hd"><h2>礼包兑换期限</h2></div>
+            <div class="info-con" ng-bind="item.exchangeStarttime+' - '+item.exchangeEndtime"></div>
+        </div>
+        <div class="mod-con">
+            <div class="hd "><h2>使用方法</h2></div>
+            <div class="info-con adapter_atc"  style="word-break:break-all;word-wrap:break-word"  ng-bind-html="item.howToUse"></div>
+        </div>
+    </div>
+</div>
+<!-- 礼包详情 结束 -->

@@ -1,0 +1,11 @@
+<div class="home-con newgame-pingce" ng-if="vm.articleList.length>0">
+  <ul class="newgame-pingce-list">
+    <li class="item-game" ng-repeat="item in vm.articleList" bindonce="item" ng-click="vm.goArticleDetail(item, 'evaluate')">
+      <div class="pic"><img ng-src="{{item.imgUrl||item.logourl}}" hide-on-error="hide" width="60" height="60"></div>
+      <div class="con">
+        <div class="name" bo-text="item.title"></div>
+        <div class="mix-info" bo-text="(item.summary||item.content)|removeHtml"></div>
+      </div>
+    </li>
+  </ul>
+</div>

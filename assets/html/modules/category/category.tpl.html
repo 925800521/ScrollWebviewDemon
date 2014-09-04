@@ -1,0 +1,10 @@
+<div class="game-sort">
+  <ul>
+    <li ng-repeat="category in categoryList" bindonce="category" ng-click="goCategoryDetailPage(category, $index)">
+      <div class="con">
+        <img ng-src="{{category.frontIcon}}"  default-src="images/sort_default.png"/>
+        <span class="name" bo-text="category.name + (category.total ? '(' + category.total + ')' : '')"></span>
+      </div>
+    </li>
+  </ul>
+</div>

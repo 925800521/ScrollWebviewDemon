@@ -1,0 +1,109 @@
+
+<div style="text-align: center;margin-top: 10px;">
+  选择已有接口:<select type="text" style="width:300px;height:30px" ng-model="methodName">
+    <option value="">请选择(如果选择了,就校验选择接口，否则校验输入接口)</option>
+    <option value=getCache>getCache</option>
+    <option value=setCache>setCache</option>
+    <option value=setConfig>setConfig</option>
+    <option value=getConfig>getConfig</option>
+    <option value=setClipboard>setClipboard</option>
+    <option value=getClipboard>getClipboard</option>
+   </select> <br>
+ 输入接口:
+  <input type="text" style="width:300px;height:30px" ng-model="myMethodName"><br />
+  <input type="button" ng-click="checkInterface(methodName,myMethodName)"  style="height: 40px;width:150px"  value="checkInterface检查接口" /> <br />
+</div>
+
+<div style="text-align: center;margin-top: 10px;">
+  <input type="text" style="width:300px;height:30px" ng-model="key" placeholder="请输入测试信息"><br />
+  <input type="button" ng-click="showMessage(key)"   style="height: 40px;width:150px"  value="showMessage测试" />
+</div>
+
+<div style="text-align: center;margin-top: 10px;">
+  环境变量：<select type="text" style="width:300px;height:30px" ng-model="envKey">
+    <option value="">请选择</option>
+    <option value=uuid>uuid</option>
+    <option value=mode>mode</option>
+    <option value=imei>imei</option>
+    <option value=mac>mac</option>
+    <option value=network>network</option>
+    <option value=apkversion>apkversion</option>
+    <option value=versioncode>versioncode</option>
+    <option value=templateversion>templateversion</option>
+    <option value=systemversion>systemversion</option>
+    <option value=cpucores>cpucores</option>
+    <option value=totalram>totalram</option>
+    <option value=totalavailstorage>totalavailstorage</option>
+    <option value=externalavailstorage>externalavailstorage</option>
+    <option value=internalavailstorage>internalavailstorage</option>
+    <option value=cpufreq>cpufreq</option>
+    <option value=realscreenw>realscreenw</option>
+    <option value=realscreenh>realscreenh</option>
+    <option value=webviewid>webviewid</option>
+  </select><br />{{envKey}}
+  <br />
+  <input type="button" ng-click="getEnv(envKey)"   style="height: 40px;width:150px"  value="getEnv测试" />
+</div>
+
+<div style="text-align: center;margin-top: 20px;">
+  cacheKey:<input type="text" style="width:300px;height:30px" ng-model="cacheKey"><br />
+  cacheValue:<input type="text" style="width:300px;height:30px" ng-model="cacheValue"><br />
+  缓存时间:<input type="text" style="width:100px;height:30px" ng-model="maxAge" ng-init="maxAge=20000">毫秒<br />
+  是否读取后立即清除<input type="checkbox" ng-model="clearCache" style="zoom:200%"  ng-init="clearCache=false"> <br />
+  <br />
+  <input type="button" ng-click="setCache(cacheKey,cacheValue,maxAge)" style="height: 40px;width:150px"   value="setCache测试" />
+  <input type="button" ng-click="getCache(cacheKey,clearCache)"  style="height: 40px;width:150px"   value="getCache测试" /> <br />
+
+</div>
+
+<div style="text-align: center;margin-top: 20px;">
+  sessionKey:<input type="text" style="width:300px;height:30px" ng-model="sessionKey"><br />
+  sessionValue:<input type="text" style="width:300px;height:30px" ng-model="sessionValue"><br />
+
+  <input type="button" ng-click="setSession(sessionKey,sessionValue)"  style="height: 40px;width:150px"   value="setSession测试" />
+  <input type="button" ng-click="getSession(sessionKey)"  style="height: 40px;width:150px"   value="getSession测试" /> <br />
+
+</div>
+
+<div style="text-align: center;margin-top: 10px;">
+  configKey:<input type="text" style="width:300px;height:30px" ng-model="configKey"><br />
+  configValue:<input type="text" style="width:300px;height:30px" ng-model="configValue"><br />
+  已有配置：<select type="text" style="width:300px;height:30px" ng-model="configedKey">
+  <option value="">请选择(如果选择了,就获取选择配置的值，否则获取configKey的值)</option>
+  <option value=imageEnabled selected="true">是否显示图片imageEnabled</option>
+  <option value=imageCacheDir>图片缓存目录imageCacheDir</option>
+  <option value=consoleLevel>日志级别consoleLevel</option>
+  <option value=clientServer>客户端使用的服务端地址clientServer</option>
+  <option value=h5Server>前端使用的服务端地址h5Server</option>
+  </select> <br />
+  <input type="button" ng-click="setConfig(configKey,configValue)" style="height: 40px;width:150px"   value="setConfig测试" />
+  <input type="button" ng-click="getConfig(configKey,configedKey)" style="height: 40px;width:150px"   value="getConfig测试" /> <br />
+
+</div>
+
+
+<div style="text-align: center;margin-top: 10px;">
+  clipboard:<input type="text" style="width:300px;height:30px" ng-model="clipboard"><br />
+  <input type="button" ng-click="setClipboard(clipboard)"  style="height: 40px;width:150px"   value="setClipboard测试" />
+  <input type="button" ng-click="getClipboard()"   style="height: 40px;width:150px"  value="getClipboard测试" />
+
+</div>
+<div style="text-align: center;margin-top: 10px;">
+  writeLog msg:<input type="text" style="width:300px;height:30px" ng-model="logMsg"><br />
+  <input type="button" ng-click="writeLog(logMsg)"  style="height: 40px;width:150px"   value="writeLog测试" /> <br />
+</div>
+
+<div style="text-align: center;margin-top: 10px;">
+  readFile:<input type="text" style="width:300px;height:30px" ng-model="pathUrl" ng-init="pathUrl='/menu.html'"><br />
+  是否同步读取:<input type="checkbox" ng-model="isSyn" style="zoom:200%" ng-init="isSyn=true"> <br />
+  <input type="button" ng-click="readFile(pathUrl,isSyn)"  style="height: 40px;width:150px"  value="readFile测试" /> <br />
+</div>
+
+<div style="text-align: center;margin-top: 10px;">
+  addStat接口:<input type="text" style="width:300px;height:30px" ng-model="statKey"
+                  ng-init="statKey='detail_news'"><br />
+
+  <input type="button" ng-click="addStat(statKey)"  style="height: 40px;width:150px"  value="addStat测试" /> <br />
+</div>
+
+

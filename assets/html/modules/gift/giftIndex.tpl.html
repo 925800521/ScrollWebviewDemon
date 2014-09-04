@@ -1,0 +1,81 @@
+<!--礼包首页 开始-->
+<!-- 焦点图 开始 -->
+<section ngm-ad-slide="carousel" a1="lbfhsy_jdt" class="index-show"></section>
+<!-- 焦点图 结束 -->
+<autocomplete ng-model="keyword"
+              attr-placeholder="输入礼包关键字"
+              click-activation="false"
+              search="search(keyword)">
+</autocomplete>
+
+<div class="home-con gift-installed" ng-if="installed.length">
+    <div class="hd"><h2>已安装游戏礼包</h2></div>
+    <ul game-gift-list="installed"></ul>
+</div>
+<div class="home-con gift-guess" ng-if="guessList.length">
+    <div class="hd"><h2>猜你喜欢</h2></div>
+    <ul>
+        <li class="item-game" ng-repeat="guess in guessList | limitTo:4" ng-click="toList(guess, $index,'lbfhsy_cnxh')">
+            <div class="pic" >
+                <img ng-if="guess.game.logourl" ng-src="{{guess.game.logourl}}" hide-on-error='hide' width="60" height="60" >
+            </div>
+            <div class="con">
+                <div class="name">{{guess.game.shortName}}</div>
+                <div class="info">今天新增：<span class="em">{{guess.giftSummary.newCount}}</span></div>
+                <div class="info">礼包总数：<span class="em">{{guess.giftSummary.giftTotal}}</span></div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="home-con code-gift" ng-if="activation.length">
+    <div class="hd"><h2>激活码</h2></div>
+    <ul class="item-list-act">
+        <li class="item-act" ng-repeat="item in activation | limitTo:3" ng-click="goGiftDetail(item, $index)">
+            <div class="game-con">
+                <div class="pic" >
+                    <img ng-if="item.game.logourl" ng-src="{{item.game.logourl}}" hide-on-error='hide' width="60" height="60" >
+                </div>
+                <div class="con">
+                    <div class="name">{{item.game.shortName}}</div>
+                    <div class="mix-info">{{item.gifts[0].base.truncatedName}}</div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="home-con new-gift" ng-if="beginner.length">
+    <div class="hd"><h2>新服礼包</h2><div class="more"><a ng-click="goMoreGiftPage(1,'btn_newservicegiftlist','lbfhsy_xflb')">更多</a></div></div>
+    <ul class="item-list-act">
+        <li class="item-act" ng-repeat="item in beginner | limitTo:3" ng-click="toList(item, $index,'lbfhsy_xflb')">
+            <div class="game-con">
+                <div class="pic" >
+                    <img ng-if="item.game.logourl" ng-src="{{item.game.logourl}}" hide-on-error='hide' width="60" height="60" >
+                </div>
+                <div class="con">
+                    <div class="name">{{item.game.shortName}}</div>
+                    <div class="info" ng-if="item.gifts.length">{{item.gifts[0].base.truncatedName}}</div>
+                    <div class="info" ng-if="item.gifts.length"><span class="em">{{item.gifts[0].base.issueStarttime|formatDate:'yyyy-MM-dd'}}</span></div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="home-con more-gift"  ng-if="privilege.length">
+    <div class="hd"><h2>特权礼包</h2><div class="more"><a ng-click="goMoreGiftPage(3,'btn_privilegegiftlist','lbfhsy_tqlb')">更多</a></div></div>
+    <ul class="item-list-act">
+        <li class="item-act" ng-repeat="item in privilege | limitTo:3" ng-click="toList(item, $index,'lbfhsy_tqlb')">
+            <div class="game-con">
+                <div class="pic" >
+                    <img ng-if="item.game.logourl" ng-src="{{item.game.logourl}}" hide-on-error='hide' width="60" height="60" >
+                </div>
+                <div class="con">
+                    <div class="name">{{item.game.shortName}}</div>
+                    <div class="info" ng-if="item.gifts.length">{{item.gifts[0].base.truncatedName}}</div>
+                    <div class="info" ng-if="item.gifts.length"><span class="em">{{item.gifts[0].base.issueStarttime|formatDate:'yyyy-MM-dd'}}</span></div>
+                </div>
+            </div>
+            
+        </li>
+    </ul>
+</div>
+<!--礼包首页 结束-->

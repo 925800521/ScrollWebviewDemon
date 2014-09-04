@@ -1,0 +1,19 @@
+<div class="home-con newgame-future mod-none" ng-if="gameList.length>0"  bindonce>
+  <div class="newgame-future-head">
+    <span class="th-name">游戏</span>
+    <span class="th-status">最新动态</span>
+    <span class="th-count">热度</span>
+    <span class="th-btn"></span>
+  </div>
+  <ul class="newgame-future-list">
+    <li ng-repeat="gameInfo in gameList" bindonce="gameInfo" ng-click="goGameDetail(gameInfo,{a1:'xyqdb'})">
+      <span class="name"><em class="num" ng-bind="$index+1"></em>{{gameInfo.base.shortName}}</span>
+      <span class="status" bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus">
+      </span><span class="count em" bo-text="gameInfo.adm.adWord"></span>
+      <div class="btns">
+        <span ng-class="{'btn-primary-dis': gameInfo.isFollowed||gameInfo.base.isSimple,'btn-primary':!gameInfo.isFollowed}" ng-click="toggleFollowState($event,gameInfo)" ng-bind="gameInfo.isFollowed? '已关注':'关注'">
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>

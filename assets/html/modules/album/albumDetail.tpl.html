@@ -1,0 +1,38 @@
+<!-- 专题信息 -->
+<ul bindonce="albumInfo" class="toppic">
+  <li class="item-topic">
+    <div class="posi-rel">
+      <img bo-if="!hideImage" ng-src="{{albumInfo.imgUrl}}" width="100%"/>
+      <div bo-if="hideImage" class="default-img" bo-style="{'height':noImageHeight + 'px'}"></div>
+      <div class="topic-like">
+        <img src="images/icon_heart.png"><span bo-text="albumInfo.downStatTotal"></span>
+      </div>
+    </div>
+    <div class="topic-info">
+      <p bo-html="albumInfo.desp"></p>
+      <h4><span class="topic-info-time" bo-text="albumInfo.createTime|slice:0:10"></span></h4>
+    </div>
+  </li>
+</ul>
+
+<!-- 游戏列表 -->
+<div ng-include="'modules/shared/gameList.tpl.html'"></div>
+
+<!-- 交叉专题 -->
+<ul ng-if="crossAlbumList.length>0" class="promo-contain">
+  <li ng-repeat="album in crossAlbumList" bindonce="album" ng-click="goCrossAlbumDetail(album)">
+    <span ng-if="!hideImage" class="pic">
+      <img ng-src="{{album.imgUrl}}" class="promo-banner">
+    </span>
+    <span ng-if="hideImage" class="pic default-img">
+      <img src="images/space.png" class="promo-banner">
+    </span>
+    <div class="promo-more-title" bo-text="album.name"></div>
+  </li>
+  <li ng-click="goAlbum()">
+    <div class="promo-more">
+      更多精彩专题 <img src="images/arrow_w_r.png" width="8">
+    </div>
+  </li>
+</ul>
+</div>

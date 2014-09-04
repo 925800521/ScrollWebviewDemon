@@ -1,0 +1,20 @@
+<div class="item-game" ngm-game-item="gameInfo" ng-if="gameInfo" bindonce="gameInfo" bo-switch="gameInfo.base.isSimple">
+  <div class="pic"><img ng-src="{{gameInfo.base.gameIcon}}" hide-on-error='hide' width="60" height="60" style="visibility: hidden"></div>
+  <div class="con">
+    <div class="name"><span bo-text="gameInfo.base.gameName"></span><span class="icon-good" ng-if="gameInfo.status.excellent=='9'"></span></div>
+    <div class="info" bo-switch-when="true">
+      <span bo-text="gameInfo.base.operationType"></span><span class="space">|</span><span bo-text="gameInfo.base.category"></span><span class="space" bo-if="gameInfo.base.fileSize">|</span><span bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+    </div>
+    <div class="info" bo-switch-when="false">
+      <span bo-text="gameInfo.base.opStatus"></span><span class="space" bo-if="gameInfo.base.fileSize">|</span><span bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+    </div>
+    <div class="info">
+      <p class="start-system">
+        <span ng-repeat="i in [0,1,2,3,4]" bo-class="{'good': gameInfo.status.avgScore>=i+1, 'soso': gameInfo.status.avgScore>i && gameInfo.status.avgScore<i+1}"></span>
+      </p><span bo-text="'(' + gameInfo.status.scoreTotal + '人评分)'"></span>
+    </div>
+  </div>
+  <div bo-switch-when="false" ng-class="followClass" style="visibility: hidden" ng-style="gameInfo.ui.btnText && {visibility: 'visible'}">
+    <span class="btn-primary" ng-class="'btn-primary'+gameInfo.ui.btnStyle" ng-click="gameInfo.ui.clickBtn(gameInfo, statInfo, $event)">{{gameInfo.ui.btnText}}</span>
+  </div>
+</div>

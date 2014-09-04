@@ -1,0 +1,16 @@
+<div>
+  <h2>Protocol协议测试</h2>
+  <hr/>
+  <button ng-click="triggerEvent()">触发事件</button>
+  <hr/>
+    <p>
+    <h3>InitData</h3>
+    <pre>{{initData|json}}</pre>
+    </p>
+  <hr/>
+  <div ng-include="'modules/shared/singleGame.tpl.html'"></div>
+  <div ng-include="'modules/shared/gameList.tpl.html'"></div>
+  <hr/>
+  <button ng-click="triggerEvent()">触发事件</button>
+
+</div>

@@ -1,0 +1,120 @@
+<div bindonce>
+    <!-- 焦点图 开始 -->
+    <section ngm-ad-slide="carousel" id="ad_carousel" selectedIndex="{{selectedIndex}}" a1="wy_jdt" ada1="wy" region="onlinegame" exposure-stat="true" class="index-show"></section>
+    <!-- 焦点图 结束 -->
+
+    <ul class="mod-menu" id="netGameMenu" ng-if="loaded">
+        <li class="nav-sort" ng-click="openPage('/rank.html',{rankTag:'wyrb'},'rank',{p1:'wyfl'})">网游分类</li>
+        <li class="nav-gift" ng-if="imei" ng-click="openPage('/gift.html',{},'gift',{p1:'lbfh'})">礼包·激活码<sup class="count" ng-if="giftCount!=0&&giftCount"><span class="number" ng-bind="giftCount"></span></sup></li>
+        <li class="nav-rec" ng-if="!imei" ng-click="openPage('/netgame/pastCommend.html',{type:401},'common')">往期精品</li>
+        <li class="nav-kaifu" ng-click="openPage('/netgame/event.html',{type:0,tabIndex:1},'game_event',{p1:'kfkc'})">开服开测</li>
+    </ul>
+
+    <div class="home-con netgame-news" ng-if="topImageAdList.length>0||topAdList.length>0">
+        <div class="hd"><h2>头条</h2></div>
+        <ul class="netgame-list" id="ad_topAd">
+            <li class="item-news item-first default-img" ng-if="topImageAdList.length>0"
+                gameId="{{topImageAdList[0].gameId}}" adpId="{{topImageAdpId}}" admId="{{topImageAdList[0].admId}}"
+                ng-click="openPage(topImageAdList[0].url,{a1:'wy_tt',adpId:topImageAdpId,admId:topImageAdList[0].admId},'',{p1:'tt',position:$index+1,gameId:topImageAdList[0].gameId})">
+                <div class="pic">
+                    <img ng-src="{{topImageAdList[0].imageUrl}}" width="80" height="62" hide-on-error="hide">
+                </div>
+                <div class="con">
+                    <div class="name" bo-text="topImageAdList[0].adWord"></div>
+                    <div class="news-info"><span ng-if="topImageAdList[0].commentTotal>0">{{topImageAdList[0].commentTotal}}条评论
+                    </span><span> {{topImageAdList[0].modifyTime|transformDate}}</span></div>
+                </div>
+            </li>
+            <li class="item-news" ng-repeat="item in topAdList | limitTo:3"
+                gameId="{{item.gameId}}" adpId="{{topAdAdpId}}" admId="{{item.admId}}"
+                ng-click="openPage(item.url,{a1:'wy_tt',adpId:topAdAdpId,admId:item.admId},'',{p1:'tt',position:$index+2,gameId:item.gameId})">
+                <div class="name">
+                    <span ng-if="item.p1" class="icon-title" bo-class="item.className" bo-text="item.p1">
+                    </span><span class="text" bo-text="item.adWord"></span><span class="news-info">
+                    <span ng-if="item.commentTotal>0">{{item.commentTotal}}条评论
+                    </span><span bo-text="item.modifyTime|transformDate"></span></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="home-con netgame-hot" ng-if="hotGameList.length>0">
+        <div class="hd"><h2>热门网游</h2>
+            <div class="more"><a ng-click="openPage('/rank.html',{rankTag:'xyrb'},'rank',{action:'btn_getmore',a1:'wy_rmwy',p1:'rmyx'})">更多</a></div>
+        </div>
+        <ul class="netgame-hot-list" id="ad_hotGame" ngm-game-list="hotGameList">
+            <li class="item-act" ng-repeat="gameInfo in hotGameList | limitTo:8"
+                gameId="{{gameInfo.base.gameId}}" adpId="{{hotGameAdpId}}" admId="{{gameInfo.adm.admId}}"
+                ng-click="goGameDetail(gameInfo,{a1:'wy_rmwy',p1:'rmyx',position:$index+2,adpId:hotGameAdpId})" bindonce>
+                <div ng-init="statInfo={a1:'wy_rmwy',adpId:hotGameAdpId,ada1:'wy'}" ng-include="'modules/shared/blockGameList.tpl.html'"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="home-con netgame-rec" ng-if="recGameList.length>0">
+        <div class="hd"><h2>编辑推荐</h2></div>
+        <ul class="netgame-hot-list"  id="ad_recGame" ngm-game-list="recGameList">
+            <li class="item-act" ng-repeat="gameInfo in recGameList | limitTo:8"
+                gameId="{{gameInfo.base.gameId}}" adpId="{{recGameAdpId}}" admId="{{gameInfo.adm.admId}}"
+                ng-click="goGameDetail(gameInfo,{a1:'wy_bjtj',p1:'bjtj',position:$index+1,adpId:recGameAdpId})" bindonce>
+                  <div ng-init="statInfo={a1:'wy_bjtj',adpId:recGameAdpId,ada1:'wy'}" ng-include="'modules/shared/blockGameList.tpl.html'"></div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="home-con netgame-today" ng-if="dailyImageGame.length>0||gameList.length>0">
+        <div class="hd"><h2>今日精品</h2>
+            <div class="more"><a ng-click="openPage('/netgame/pastCommend.html',{type:401},'common',{action:'btn_getmore',a1:'wy_jrjp',p1:'jrjp'})">往期精品</a></div>
+        </div>
+        <div class="netgame-today-focus default-img" id="ad_daily_one" ng-if="dailyImageGame.length>0"
+             ng-click="goGameDetail(dailyImageGame[0],{a1:'wy_jrjp',p1:'jrjp',position:2,adpId:dailyImageAdpId})">
+            <img ng-src="{{dailyImageGame[0].adm.imageUrl}}" width="100%" hide-on-error="hide" ng-style="{height:dailyImageHeight+'px'}"
+             gameId="{{dailyImageGame[0].base.gameId}}" adpId="{{dailyImageAdpId}}" admId="{{dailyImageGame[0].adm.admId}}" >
+            <div class="news-name" bo-class="{'pop-gift':(dailyImageGame[0].status.gift)&&imei}"><span class="news-title"><strong
+                    ng-bind="dailyImageGame[0].base.shortName">
+            </strong><span ng-bind="dailyImageGame[0].adm.adWord||dailyImageGame[0].detail.instruction"></span></span></div>
+        </div>
+        <div ng-init="statInfo={a1:'wy_jrjp',adpId:gameListAdpId,ada1:'wy',p1:'jrjp',pStart:2}" ng-include="'modules/shared/gameList.tpl.html'" id="ad_dailyRec" ng-if="gameList.length>0"></div>
+    </div>
+
+    <div class="home-con netgame-testing" ng-if="openGameList.length>0">
+        <div class="hd"><h2>开服游戏</h2>
+            <div class="more"><a ng-click="openPage('/netgame/event.html',{type:1,tabIndex:2},'game_event',{action:'btn_getmore',a1:'wy_kfyx',p1:'kfyx'})">更多</a></div>
+        </div>
+        <div class="netgame-testing-list">
+            <div class="netgame-testing-head">
+                <span class="name">游戏</span>
+                <span class="state">状态</span>
+                <span class="date">时间</span>
+                <span class="pack" ng-if="imei">礼包</span>
+                <span class="down">下载</span>
+            </div>
+            <ul id="ad_openService">
+                <li gameId="{{gameInfo.base.gameId}}" adpId="{{openGameAdpId}}" admId="{{gameInfo.adm.admId}}"
+                    class="netgame-testing-item" ng-repeat="gameInfo in openGameList | limitTo:4"
+                    ng-click="goGameDetail(gameInfo,{a1:'wy_kfyx',p1:'kfyx',position:$index+2,adpId:openGameAdpId})">
+                    <span class="name"  bo-text="gameInfo.base.shortName"></span>
+                    <span class="state"  bo-text="gameInfo.adm.adWord||gameInfo.event.type"></span>
+                    <span class="date" bo-text="gameInfo.event.beginTime|formatDate:'M.dd'"></span>
+                    <span ng-if="imei" class="pack" ng-click="goGiftList($event,gameInfo,{a1:'wy_kfyx',p1:'kfyx',position:$index+1})"><span ng-class="{'ico-pack':gameInfo.status.gift,'ico-pack-dis':!gameInfo.status.gift}"></span></span>
+                    <span class="down" ng-click="download($event,gameInfo,{a1:'wy_kfyx',adpId:openGameAdpId})"><span ng-class="gameInfo.downClass||'ico-down'"></span></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="home-con netgame-srot" ng-if="categoryList.length>0">
+        <div class="hd"><h2>网游分类</h2><div class="more"><a ng-click="openPage('/rank.html',{rankTag:'wyrb'},'rank',{action:'btn_getmore',a1:'wy_wyfl',p1:'wyfl'})">更多</a></div></div>
+        <div ng-include="'modules/category/categoryList.tpl.html'"></div>
+    </div>
+
+    <div class="home-con" ng-if="subjectList.length>0">
+        <div class="hd"><h2>网游题材</h2></div>
+        <div class="netgame-keyword">
+            <ul>
+                <li ng-repeat="subject in subjectList" ng-click="goToSubjectPage(subject,$index)">
+                    <a ng-class="{'bg-red':$index==1,'bg-navy':$index==5,'bg-green':$index==8,'bg-yellow':$index==12,'bg-blue':$index==14}" bo-text="subject.name"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--网游首页 结束-->
+</div>

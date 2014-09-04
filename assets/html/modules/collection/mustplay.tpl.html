@@ -1,0 +1,44 @@
+<div ng-if="groupGameList.length>0" ng-repeat="groupItem in groupGameList" bindonce="groupItem">
+  <div class="must-pay" ng-if="groupItem.gameList.length>0">
+    <h2 bo-text="groupItem.groupName"></h2>
+    <ul class="mod-game-list" id="gameList{{$index}}" ngm-game-list="groupItem.gameList" ngm-game-list-key="{{'groupItem.gameList' + $index}}">
+      <!-- BEGIN 游戏信息-->
+      <li ng-repeat="gameInfo in groupItem.gameList" bindonce="gameInfo"
+          ng-click="goGameDetail(gameInfo)" class="item-game"
+          gameId="{{gameInfo.base.gameId}}">
+        <span class="no" bo-text="$index+1"></span>
+        <div class="game-con" ng-switch="gameInfo.ui.region">
+          <!-- BEGIN 游戏图标-->
+          <div class="pic"><span class="pic-mask">
+            <img ng-src="{{gameInfo.ui.data.gameIcon}}" hide-on-error='hide' width="60" height="60">
+          </span><span bo-class="{'icon-packs': imei && gameInfo.status.gift, 'icon-new': !(imei && gameInfo.status.gift) && gameInfo.status.newest}"></span><span bo-if="gameInfo.status.starting" class="icon-starting"></span>
+          </div>
+          <!-- END 游戏图标-->
+
+          <h3 class="name" bo-text="gameInfo.base.shortName"></h3>
+
+          <!-- BEGIN 概要信息-->
+          <p class="info" ng-switch-when="info">
+            <span bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus"></span><span class="space" bo-if="gameInfo.base.fileSize">|</span><span bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+          </p>
+          <!-- END 概要信息-->
+
+          <!-- BEGIN 状态信息-->
+          <p class="info" ng-switch-when="state">{{gameInfo.ui.shortStateText}}</p>
+          <!-- BEGIN 状态信息-->
+
+          <!-- BEGIN 进度信息-->
+          <div class="info" ng-switch-when="progress">
+            <div class="progress"><span class="bg" ng-style="{'width': gameInfo.ui.data.progress + '%'}"></span></div>
+          </div>
+          <!-- BEGIN 进度信息-->
+
+          <!-- BEGIN 下载按钮-->
+          <span ng-class="'btn-secondary'+gameInfo.ui.btnStyle" ng-click="gameInfo.ui.clickBtn(gameInfo,{a1:'bw_'+gameInfo.base.groupFlag}, $event)" ng-bind="gameInfo.ui.btnText"></span>
+          <!-- END 下载按钮-->
+        </div>
+      </li>
+      <!-- END 游戏信息-->
+    </ul>
+  </div>
+</div>

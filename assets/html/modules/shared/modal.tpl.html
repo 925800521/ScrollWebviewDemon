@@ -1,0 +1,14 @@
+<!--<style>-->
+  <!--body{-->
+    <!--background: transparent;-->
+  <!--}-->
+<!--</style>-->
+<div class="pop-alert" style="top:15%;" bindonce>
+  <h2 bo-text="title"></h2>
+  <div class="pop-con" style="word-wrap:break-word;word-break: break-all" bo-html="content"></div>
+  <div class="pop-control">
+    <div ng-repeat="btn in btnList track by $index" bindonce="btn" ng-click="clickBtn(btn)" bo-class=" btn.primary ? 'pop-btn-em' : 'pop-btn' " >
+      <span class="text" bo-text="btn.text"></span>
+    </div>
+  </div>
+</div>

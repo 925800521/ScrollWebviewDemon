@@ -1,0 +1,39 @@
+<!-- 游戏信息 开始 -->
+<div class="gift-detail">
+    <ul>
+        <li class="item-number" style="display: block">
+            <div class="item-game" ng-if="gameInfo" ng-click="goGameDetail(gameInfo)" bindonce>
+                <div class="pic"><img ng-if="gameInfo.base.gameIcon" ng-src="{{gameInfo.base.gameIcon}}" hide-on-error='hide' width="60" height="60">
+                </div>
+                <div class="con">
+                    <div class="name"><span bo-text="gameInfo.base.gameName"></span><span class="icon-good"
+                                                                                          ng-if="gameInfo.status.excellent=='9'"></span>
+                    </div>
+                    <div class="info">
+                        <span ng-if="gameInfo.base.isSimple" bo-text="gameInfo.base.operationType"></span><span
+                            ng-if="gameInfo.base.isSimple" class="space">|</span><span
+                            bo-text="gameInfo.base.isSimple ? gameInfo.base.category : gameInfo.base.opStatus"></span><span
+                            class="space" ng-if="gameInfo.base.fileSize">|</span><span
+                            bo-text="gameInfo.base.fileSize | formatSize:1"></span>
+                    </div>
+                    <div class="info" ng-if="giftSummary">今日新增：<span class="em" ng-bind="giftSummary.newCount"></span>
+                        &nbsp;礼包总数：<span class="em" ng-bind="giftSummary.giftTotal"></span></div>
+                </div>
+                <div ng-if="!gameInfo.base.isSimple">
+                    <span class="btn-primary" ng-click="$event.stopPropagation();toggleFollowState(true);" ng-show="!isFollowed">关注</span>
+                    <span class="btn-primary-long" ng-click="$event.stopPropagation();toggleFollowState(false)" ng-show="isFollowed">取消关注</span>
+                    <div class="mod-tips" ng-show="!isFollowed && isShowFollowTip">
+                        <p>关注后可接收游戏下载、开测、礼包提醒。</p>
+                        <div class="icon-close"><a ng-click="hideFollowTip()">关闭</a></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- 游戏信息 结束 -->
+
+    <!-- 礼包列表 开始 -->
+    <ul gift-list="giftList" no-pic="true" class="mod-con gift-list-con"></ul>
+    <!-- 礼包列表 结束 -->
+</div>
